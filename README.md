@@ -1,5 +1,4 @@
 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
-    * скопировать из примера в СДО
     <img width="6708" height="2156" alt="image" src="https://github.com/user-attachments/assets/699e2017-116c-4f7b-a9cd-bb31ec51056b" />
 2) РЕАЛИЗАЦИЯ ТОВАРА
      <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/57e578b1-e4bf-4f1e-b6cf-7b1cd8d8377d" />
