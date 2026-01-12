@@ -1,6 +1,6 @@
 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
     * скопировать из примера в СДО
-    <img width="643" height="261" alt="image" src="https://github.com/user-attachments/assets/f4e335ff-0d85-4720-9632-de0956d195cf" />
+    <img width="6708" height="2156" alt="image" src="https://github.com/user-attachments/assets/699e2017-116c-4f7b-a9cd-bb31ec51056b" />
 2) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
     * получение фио клиента
     * получение времени посещения
