@@ -1,3 +1,5 @@
+Диаграмма верхнего уровня A-0
+<img width="1071" height="521" alt="image" src="https://github.com/user-attachments/assets/51c0b1b5-6f7c-4f2f-8324-a5d9dc949e21" />
 
 Диаграмма нулевого уровня
 <img width="1882" height="1141" alt="image" src="https://github.com/user-attachments/assets/f5401fe3-b256-4a09-84a4-d70ffd14b475" />
