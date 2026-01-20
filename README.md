@@ -10,10 +10,8 @@
      <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/57e578b1-e4bf-4f1e-b6cf-7b1cd8d8377d" />
 3) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
 4) ОФОРМЛЕНИЕ ЗАКАЗА
-    * получение номера столика
-    * получение списка заказанных блюд
-    * получение количества гостей
-    * формирование айди заказа
+    <img width="651" height="261" alt="Диаграмма без названия drawio(3)" src="https://github.com/user-attachments/assets/2c6f5e73-633c-433b-99c6-7e0aff0cbc6f" />
+
 5) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
     <img width="821" height="371" alt="Диаграмма без названия drawio(2)" src="https://github.com/user-attachments/assets/4aa1b7c0-24ca-4acf-b17f-59e9ec26d3a5" />
 
