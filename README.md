@@ -11,7 +11,7 @@
 3) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
 4) ОФОРМЛЕНИЕ ЗАКАЗА
    
-    <img width="651" height="261" alt="Диаграмма без названия drawio(3)" src="https://github.com/user-attachments/assets/2c6f5e73-633c-433b-99c6-7e0aff0cbc6f" />
+   <img width="651" height="261" alt="Диаграмма без названия drawio(4)" src="https://github.com/user-attachments/assets/a3213f49-4b26-4d31-8dc5-6c7559ff919b" />
 
 5) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
     <img width="821" height="371" alt="Диаграмма без названия drawio(2)" src="https://github.com/user-attachments/assets/4aa1b7c0-24ca-4acf-b17f-59e9ec26d3a5" />
