@@ -10,7 +10,7 @@
     
 3) РЕАЛИЗАЦИЯ ТОВАРА
    
-     <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/57e578b1-e4bf-4f1e-b6cf-7b1cd8d8377d" />
+     
      
 5) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
    
