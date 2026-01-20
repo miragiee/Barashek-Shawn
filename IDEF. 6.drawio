@@ -1,0 +1,77 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.3.3">
+  <diagram name="Страница-1" id="gV0vFMBhwqUQwLEsBGOO">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-4" edge="1" parent="1" source="d_B_YDdYdxw4yhFI_WRw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="d_B_YDdYdxw4yhFI_WRw-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-6" edge="1" parent="1" source="d_B_YDdYdxw4yhFI_WRw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="d_B_YDdYdxw4yhFI_WRw-5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="410" />
+              <mxPoint x="240" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Сбор и обработка данных" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="61" vertex="1">
+          <mxGeometry height="30" width="40" x="70" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-10" edge="1" parent="1" source="d_B_YDdYdxw4yhFI_WRw-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="d_B_YDdYdxw4yhFI_WRw-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Отчеты посетители/марочный" vertex="1">
+          <mxGeometry height="60" width="120" x="280" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-12" edge="1" parent="1" source="d_B_YDdYdxw4yhFI_WRw-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Отчеты средний чек/движение товаров" vertex="1">
+          <mxGeometry height="60" width="120" x="280" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="62" vertex="1">
+          <mxGeometry height="30" width="40" x="270" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="63" vertex="1">
+          <mxGeometry height="30" width="40" x="270" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Отчеты запасы/зп" vertex="1">
+          <mxGeometry height="60" width="120" x="480" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="64" vertex="1">
+          <mxGeometry height="30" width="40" x="470" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="Структурированные&lt;div&gt;данные&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="140" x="130" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="Все&lt;div&gt;данные&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="70" x="400" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-16" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-40" y="410" as="sourcePoint" />
+            <mxPoint x="80" y="409.71" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Бухгалтерская отчетность, движение товара, изменение остатка" vertex="1">
+          <mxGeometry height="60" width="110" x="-40" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-18" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="409.66" as="sourcePoint" />
+            <mxPoint x="680" y="409.66" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d_B_YDdYdxw4yhFI_WRw-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Отчеты" vertex="1">
+          <mxGeometry height="30" width="60" x="610" y="380" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
