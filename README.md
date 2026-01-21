@@ -4,7 +4,7 @@
    <img width="1071" height="521" alt="image" src="https://github.com/user-attachments/assets/51c0b1b5-6f7c-4f2f-8324-a5d9dc949e21" />
 
 ### 3) Диаграмма нулевого уровня
-
+   <a name="IDEF-level-0"></a>
    <img width="1881" height="1141" alt="image" src="https://github.com/user-attachments/assets/99fbdc89-7edf-40d9-82fe-772de4f43133" />
 
 ## **Детализация**
@@ -37,4 +37,4 @@
 
 # UML Use Case
 
-> Делаем по [диаграмме нулевого уровня](#IDEF0)
+> Делаем по [диаграмме нулевого уровня](#IDEF-level-0)
