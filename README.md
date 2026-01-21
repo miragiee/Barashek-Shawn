@@ -7,6 +7,8 @@
 
    <img width="1881" height="1141" alt="image" src="https://github.com/user-attachments/assets/99fbdc89-7edf-40d9-82fe-772de4f43133" />
 
+## Детализация
+
 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
    
     <img width="1911" height="761" alt="image" src="https://github.com/user-attachments/assets/ec58da0d-bc6e-4ae6-af4b-79c5c7a2ba98" />
@@ -34,3 +36,5 @@
    <img width="736" height="261" alt="IDEF  6(2) drawio" src="https://github.com/user-attachments/assets/29a678d4-4f56-4fd8-bf0b-1ca88bb97f47" />
 
 # UML Use Case
+
+Гойда zvzvzv svo
