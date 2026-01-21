@@ -12,7 +12,7 @@
       - [Блок 5](#IDEFBlock5)
       - [Блок 6](#IDEFBlock6)
         
-2) [UML](#UML-anchor)
+2)[UML](#UML-anchor)
 
 <a name="IDEF0-anchor"></a>
 
