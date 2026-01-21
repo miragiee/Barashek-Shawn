@@ -4,15 +4,15 @@
    * [Общие диаграммы](#BigDiagrams)
       - [Диаграмма A-0](#A-0)
       - [Диаграмма нулевого уровня](#IDEF-level-0)
-   * Детализация
-      - Блок 1
-      - Блок 2
-      - Блок 3
-      - Блок 4
-      - Блок 5
-      - Блок 6
-      - 
-2) UML
+   * [Детализация](#Detalization)
+      - [Блок 1](#IDEFBlock1)
+      - [Блок 2](#IDEFBlock2)
+      - [Блок 3](#IDEFBlock3)
+      - [Блок 4](#IDEFBlock4)
+      - [Блок 5](#IDEFBlock5)
+      - [Блок 6](#IDEFBlock6)
+        
+2) [UML](#UML-anchor)
 
 <a name="IDEF0-anchor"></a>
 
@@ -34,35 +34,49 @@
    
    <img width="1881" height="1141" alt="image" src="https://github.com/user-attachments/assets/99fbdc89-7edf-40d9-82fe-772de4f43133" />
 
+<a name="Detalization"></a>
+
 ### **Детализация**
+
+<a name="IDEFBlock1"></a>
 
 #### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
    
    <img width="1911" height="761" alt="image" src="https://github.com/user-attachments/assets/ec58da0d-bc6e-4ae6-af4b-79c5c7a2ba98" />
+
+<a name="IDEFBlock2"></a>
     
 #### 2) РЕАЛИЗАЦИЯ ТОВАРА
    
    <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/4d3d6b21-d2a5-4f26-a22f-6b91abb08b7d" />
 
+<a name="IDEFBlock3"></a>
      
 #### 3) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
    
    <img width="1051" height="256" alt="IDEF0 Block3 drawio" src="https://github.com/user-attachments/assets/8fa42f7f-e08b-45c3-9011-28deb9bf744f" />
 
+<a name="IDEFBlock4"></a>
    
 #### 4) ОФОРМЛЕНИЕ ЗАКАЗА
    
    <img width="651" height="261" alt="Диаграмма без названия drawio(4)" src="https://github.com/user-attachments/assets/a3213f49-4b26-4d31-8dc5-6c7559ff919b" />
 
+<a name="IDEFBlock5"></a>
+
 #### 5) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
    <img width="821" height="371" alt="Диаграмма без названия drawio(2)" src="https://github.com/user-attachments/assets/4aa1b7c0-24ca-4acf-b17f-59e9ec26d3a5" />
 
    > Клиент может забронировать несколько столиков, например, на праздник. И на каждом столике могут заказать разные блюда, поэтому в оформлении заказа и в оформлении данных клиента есть информация о столиках
+
+<a name="IDEFBlock6"></a>
+
 #### 6) ФОРМИРОВАНИЕ ОТЧЁТОВ
 
    <img width="736" height="261" alt="IDEF  6(2) drawio" src="https://github.com/user-attachments/assets/29a678d4-4f56-4fd8-bf0b-1ca88bb97f47" />
 
+<a name="UML-anchor"></a>
+
 # UML Use Case
 
-> [!NOTE]
 > Делаем по [диаграмме нулевого уровня](#IDEF-level-0)
