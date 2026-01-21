@@ -37,5 +37,4 @@
 
 # UML Use Case
 
-Гойда zvzvzv svo
-dsvhb crjnbyf
+
