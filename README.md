@@ -1,4 +1,4 @@
-#IDEF0#
+# IDEF0
 Диаграмма верхнего уровня A-0
 <img width="1071" height="521" alt="image" src="https://github.com/user-attachments/assets/51c0b1b5-6f7c-4f2f-8324-a5d9dc949e21" />
 
