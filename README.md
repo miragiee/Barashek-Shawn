@@ -55,6 +55,6 @@
    
 5) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
    
-   <img width="425" height="362" alt="Диаграмма без названия drawio (1)" src="https://github.com/user-attachments/assets/4b8d2219-c85a-42c5-8bfa-3a6a7567d778" />
+   <img width="424" height="362" alt="Диаграмма без названия drawio (2)" src="https://github.com/user-attachments/assets/a49fd175-9876-438a-a67f-712232633ff5" />
 
 6) ФОРМИРОВАНИЕ ОТЧЁТОВ
