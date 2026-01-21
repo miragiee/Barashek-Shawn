@@ -11,7 +11,8 @@
       - Блок 4
       - Блок 5
       - Блок 6
-2)UML
+      - 
+2) UML
 
 <a name="IDEF0-anchor"></a>
 
