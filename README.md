@@ -15,7 +15,7 @@
      
 5) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
    
-   ![photo_2026-01-20_22-08-29](https://github.com/user-attachments/assets/16958654-89d8-4c7f-9e17-da23f9eef697)
+   <img width="1051" height="256" alt="IDEF0 Block3 drawio" src="https://github.com/user-attachments/assets/8fa42f7f-e08b-45c3-9011-28deb9bf744f" />
 
    
 7) ОФОРМЛЕНИЕ ЗАКАЗА
