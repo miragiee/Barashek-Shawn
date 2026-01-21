@@ -11,11 +11,11 @@
 
 ### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
    
-    <img width="1911" height="761" alt="image" src="https://github.com/user-attachments/assets/ec58da0d-bc6e-4ae6-af4b-79c5c7a2ba98" />
+   <img width="1911" height="761" alt="image" src="https://github.com/user-attachments/assets/ec58da0d-bc6e-4ae6-af4b-79c5c7a2ba98" />
     
 ### 2) РЕАЛИЗАЦИЯ ТОВАРА
    
-     <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/4d3d6b21-d2a5-4f26-a22f-6b91abb08b7d" />
+   <img width="1185" height="501" alt="IDEF block2 drawio" src="https://github.com/user-attachments/assets/4d3d6b21-d2a5-4f26-a22f-6b91abb08b7d" />
 
      
 ### 3) ОФОРМЛЕНИЕ НАЛОГОВЫХ ПЛАТЕЖЕЙ
@@ -28,7 +28,7 @@
    <img width="651" height="261" alt="Диаграмма без названия drawio(4)" src="https://github.com/user-attachments/assets/a3213f49-4b26-4d31-8dc5-6c7559ff919b" />
 
 ### 5) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА
-    <img width="821" height="371" alt="Диаграмма без названия drawio(2)" src="https://github.com/user-attachments/assets/4aa1b7c0-24ca-4acf-b17f-59e9ec26d3a5" />
+   <img width="821" height="371" alt="Диаграмма без названия drawio(2)" src="https://github.com/user-attachments/assets/4aa1b7c0-24ca-4acf-b17f-59e9ec26d3a5" />
 
    > Клиент может забронировать несколько столиков, например, на праздник. И на каждом столике могут заказать разные блюда, поэтому в оформлении заказа и в оформлении данных клиента есть информация о столиках
 ### 6) ФОРМИРОВАНИЕ ОТЧЁТОВ
