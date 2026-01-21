@@ -1,8 +1,8 @@
 # IDEF0
-Диаграмма верхнего уровня A-0
+1) Диаграмма верхнего уровня A-0
     <img width="1071" height="521" alt="image" src="https://github.com/user-attachments/assets/51c0b1b5-6f7c-4f2f-8324-a5d9dc949e21" />
 
-Диаграмма нулевого уровня
+2) Диаграмма нулевого уровня
     <img width="1881" height="1141" alt="image" src="https://github.com/user-attachments/assets/99fbdc89-7edf-40d9-82fe-772de4f43133" />
 
 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
