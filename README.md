@@ -70,9 +70,11 @@
 
 <a name="IDEFBlock6"></a>
 
-#### 6) ФОРМИРОВАНИЕ ОТЧЁТОВ
-
-   <img width="736" height="261" alt="IDEF  6(2) drawio" src="https://github.com/user-attachments/assets/29a678d4-4f56-4fd8-bf0b-1ca88bb97f47" />
+>[!WARNING]
+>Формирование отчётов можно не делать
+> #### 6) ФОРМИРОВАНИЕ ОТЧЁТОВ
+>
+>   <img width="736" height="261" alt="IDEF  6(2) drawio" src="https://github.com/user-attachments/assets/29a678d4-4f56-4fd8-bf0b-1ca88bb97f47" />
 
 <a name="UML-anchor"></a>
 
