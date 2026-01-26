@@ -82,5 +82,5 @@
 
 >[!WARNING]
 > Жестко не уверен
-
-![Use Case UML](https://github.com/user-attachments/assets/20783809-25ef-4a08-9e29-0d69e6755e71)
+>
+![Use Case UML](https://github.com/user-attachments/assets/445d454d-9f82-4359-bc6b-4ce879b545e9)
