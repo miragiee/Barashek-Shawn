@@ -83,4 +83,4 @@
 >[!WARNING]
 > Жестко не уверен
 >
-![Use Case UML](https://github.com/user-attachments/assets/445d454d-9f82-4359-bc6b-4ce879b545e9)
+![UML Use Case](https://github.com/user-attachments/assets/5c537a52-4408-4a29-aed3-71beea45e044)
