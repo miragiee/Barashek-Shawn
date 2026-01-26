@@ -80,7 +80,7 @@
 
 # UML Use Case
 
-![Use Case UML](https://github.com/user-attachments/assets/20783809-25ef-4a08-9e29-0d69e6755e71)
-
 >[!WARNING]
 > Жестко не уверен
+
+![Use Case UML](https://github.com/user-attachments/assets/20783809-25ef-4a08-9e29-0d69e6755e71)
