@@ -80,5 +80,7 @@
 
 # UML Use Case
 
->[!NOTE]
-> Делаем по [диаграмме нулевого уровня](#IDEF-level-0)
+![Use Case UML](https://github.com/user-attachments/assets/20783809-25ef-4a08-9e29-0d69e6755e71)
+
+>[!WARNING]
+> Жестко не уверен
