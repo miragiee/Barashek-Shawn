@@ -1,15 +1,15 @@
 # **Оглавление**
 
 1)[IDEF0](#IDEF0-anchor)
-    * [Диаграмма A-0](#A-0)
-    * [Диаграмма нулевого уровня](#IDEF-level-0)
-    * [Детализация](#Detalization)
-        - [Блок 1](#IDEFBlock1)
-        - [Блок 2](#IDEFBlock2)
-        - [Блок 3](#IDEFBlock3)
-        - [Блок 4](#IDEFBlock4)
-        - [Блок 5](#IDEFBlock5)
-        - [Блок 6](#IDEFBlock6)
+   * [Диаграмма A-0](#A-0)
+   * [Диаграмма нулевого уровня](#IDEF-level-0)
+   * [Детализация](#Detalization)
+      - [Блок 1](#IDEFBlock1)
+      - [Блок 2](#IDEFBlock2)
+      - [Блок 3](#IDEFBlock3)
+      - [Блок 4](#IDEFBlock4)
+      - [Блок 5](#IDEFBlock5)
+      - [Блок 6](#IDEFBlock6)
         
 2)[UML](#UML-anchor)
 
