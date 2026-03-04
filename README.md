@@ -15,6 +15,7 @@
 
 3)[Activity](#Activity-anchor)      
   * [Блок 1](#Activity-Block1)
+  * [Блок 2](#Activity-Block2)
 
 <a name="IDEF0-anchor"></a>
 
@@ -90,4 +91,8 @@
 #### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
    <a name ="Activity-Block1"></a>
    <img width="481" height="622" alt="Диаграмма деятельности drawio" src="https://github.com/user-attachments/assets/3be25e90-63f1-43b5-b8c3-935067ee3a76" />
+
+#### 2) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА И РЕАЛИЗАЦИЯ ТОВАРОВ (ЗАКАЗ)
+   <a name ="Activity-Block2"></a>
+   <img width="491" height="852" alt="Activity 2-3 drawio" src="https://github.com/user-attachments/assets/d5d87380-61f4-46e4-a7c4-b81d217ae01f" />
 
