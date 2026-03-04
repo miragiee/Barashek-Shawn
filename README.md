@@ -13,8 +13,7 @@
         
 2)[UML](#UML-anchor)
 
-3)[Activity](#Activity-anchor)
-      
+3)[Activity](#Activity-anchor)      
   * [Блок 1](#Activity-Block1)
 
 <a name="IDEF0-anchor"></a>
