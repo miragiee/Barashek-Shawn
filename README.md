@@ -86,5 +86,5 @@
 <a name="Activity-anchor"></a>
 
 #### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
-    <img width="481" height="622" alt="Диаграмма деятельности drawio" src="https://github.com/user-attachments/assets/3be25e90-63f1-43b5-b8c3-935067ee3a76" />
+   <img width="481" height="622" alt="Диаграмма деятельности drawio" src="https://github.com/user-attachments/assets/3be25e90-63f1-43b5-b8c3-935067ee3a76" />
 
