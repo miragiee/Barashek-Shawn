@@ -12,6 +12,7 @@
       - [Блок 6](#IDEFBlock6)
         
 2)[UML](#UML-anchor)
+
 3)[Activity](#Activity-anchor)
 
 <a name="IDEF0-anchor"></a>
