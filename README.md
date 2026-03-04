@@ -79,8 +79,4 @@
 <a name="UML-anchor"></a>
 
 # UML Use Case
-
->[!WARNING]
-> Жестко не уверен
->
 ![UML Use Case](https://github.com/user-attachments/assets/5c537a52-4408-4a29-aed3-71beea45e044)
