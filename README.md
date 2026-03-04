@@ -12,6 +12,7 @@
       - [Блок 6](#IDEFBlock6)
         
 2)[UML](#UML-anchor)
+3)[Activity](#Activity-anchor)
 
 <a name="IDEF0-anchor"></a>
 
@@ -80,3 +81,7 @@
 
 # UML Use Case
 ![UML Use Case](https://github.com/user-attachments/assets/5c537a52-4408-4a29-aed3-71beea45e044)
+
+# Диаграмма Деятельности
+<a name="Activity-anchor"></a>
+<img width="379" height="492" alt="image" src="https://github.com/user-attachments/assets/f7f25d89-ba57-42a0-b11f-e1d68b4cb330" />
