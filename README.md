@@ -84,4 +84,6 @@
 
 # Диаграмма Деятельности
 <a name="Activity-anchor"></a>
-<img width="379" height="492" alt="image" src="https://github.com/user-attachments/assets/f7f25d89-ba57-42a0-b11f-e1d68b4cb330" />
+
+###№ 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
+    <img width="379" height="492" alt="image" src="https://github.com/user-attachments/assets/f7f25d89-ba57-42a0-b11f-e1d68b4cb330" />
