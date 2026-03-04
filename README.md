@@ -85,5 +85,6 @@
 # Диаграмма Деятельности
 <a name="Activity-anchor"></a>
 
-###№ 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
-    <img width="379" height="492" alt="image" src="https://github.com/user-attachments/assets/f7f25d89-ba57-42a0-b11f-e1d68b4cb330" />
+#### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
+    <img width="481" height="622" alt="Диаграмма деятельности drawio" src="https://github.com/user-attachments/assets/3be25e90-63f1-43b5-b8c3-935067ee3a76" />
+
