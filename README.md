@@ -102,8 +102,6 @@
 
 
 #### 3) ОПЛАТА НАЛОГОВ
-   >[!WARNING]
-   >Лучше уклоняться
    <a name ="Activity-Block3"></a>
    <img width="142" height="352" alt="image" src="https://github.com/user-attachments/assets/84a25c80-b1eb-4887-a045-3dd41526afd1" />
 
