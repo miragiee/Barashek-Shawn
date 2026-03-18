@@ -91,8 +91,7 @@
 
 #### 1) ОФОРМЛЕНИЕ ПОСТУПЛЕНИЯ ИНГРИДИЕНТОВ
    <a name ="Activity-Block1"></a>
-   <img width="481" height="622" alt="Диаграмма деятельности drawio" src="https://github.com/user-attachments/assets/3be25e90-63f1-43b5-b8c3-935067ee3a76" />
-   <img width="716" height="991" alt="Activity Block 1p drawio" src="https://github.com/user-attachments/assets/03971dca-8d72-4054-baa1-6a88318e4b56" />
+   <img width="481" height="812" alt="Activity Block1 -2 drawio" src="https://github.com/user-attachments/assets/a39c64db-6335-4e2e-b913-ff3dc5a77611" />
 
 
 #### 2) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА И РЕАЛИЗАЦИЯ ТОВАРОВ (ЗАКАЗ)
