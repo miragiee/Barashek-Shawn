@@ -16,6 +16,7 @@
 3)[Activity](#Activity-anchor)      
   * [Блок 1](#Activity-Block1)
   * [Блок 2](#Activity-Block2)
+  * [Блок 3](#Activity-Block3)
 
 <a name="IDEF0-anchor"></a>
 
@@ -95,4 +96,9 @@
 #### 2) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА И РЕАЛИЗАЦИЯ ТОВАРОВ (ЗАКАЗ)
    <a name ="Activity-Block2"></a>
    <img width="491" height="852" alt="Activity 2-3 drawio" src="https://github.com/user-attachments/assets/d5d87380-61f4-46e4-a7c4-b81d217ae01f" />
+
+#### 3) ОПЛАТА НАЛОГОВ
+   <a name ="Activity-Block3"></a>
+   <img width="142" height="352" alt="image" src="https://github.com/user-attachments/assets/84a25c80-b1eb-4887-a045-3dd41526afd1" />
+
 
