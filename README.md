@@ -98,6 +98,8 @@
 #### 2) ОФОРМЛЕНИЕ ДАННЫХ КЛИЕНТА И РЕАЛИЗАЦИЯ ТОВАРОВ (ЗАКАЗ)
    <a name ="Activity-Block2"></a>
    <img width="491" height="852" alt="Activity 2-3 drawio" src="https://github.com/user-attachments/assets/d5d87380-61f4-46e4-a7c4-b81d217ae01f" />
+   <img width="897" height="991" alt="image" src="https://github.com/user-attachments/assets/de314224-5524-4fc5-9459-55240acce685" />
+
 
 #### 3) ОПЛАТА НАЛОГОВ
    <a name ="Activity-Block3"></a>
