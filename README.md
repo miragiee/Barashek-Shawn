@@ -111,7 +111,7 @@
 # Диаграмма последовательности
 <a name ="Squence-anchor"></a>
 
-#### 1) Оформленеи данных клиента
+#### 1) Оформление данных клиента
    <a name="Sequence-Block1"></a>
    <img width="341" height="301" alt="Sequence Block1 drawio" src="https://github.com/user-attachments/assets/d517103e-1c6f-4567-9c30-feb8070b4a48" />
 
