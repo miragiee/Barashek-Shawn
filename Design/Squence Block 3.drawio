@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.3">
+  <diagram name="Страница-1" id="3Ypu0H4jtmQuWB8A6Akk">
+    <mxGraphModel dx="879" dy="980" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-32" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="440" width="510" x="140" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Официант" vertex="1">
+          <mxGeometry height="60" width="30" x="160" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-4" parent="1" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="50" width="10" x="170" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Бухгалтер" vertex="1">
+          <mxGeometry height="220" width="100" x="280" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-8" parent="QwwwFRwHMWpIKF-98P1W-5" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="140" width="10" x="45" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-14" edge="1" parent="QwwwFRwHMWpIKF-98P1W-5" source="QwwwFRwHMWpIKF-98P1W-8" style="html=1;verticalAlign=bottom;endArrow=block;curved=1;rounded=0;" target="QwwwFRwHMWpIKF-98P1W-8" value="ВнестиСумму&lt;div&gt;ПрибылиЗаПериод()&lt;/div&gt;">
+          <mxGeometry relative="1" width="80" x="-0.3333" y="45" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="60" y="100" as="sourcePoint" />
+            <mxPoint x="140" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-13" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="QwwwFRwHMWpIKF-98P1W-5" value="ПередатьДокументы&lt;div&gt;ОбОплате()&lt;/div&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="180" y="170" as="sourcePoint" />
+            <mxPoint x="200" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-22" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="ЕНС" vertex="1">
+          <mxGeometry height="360" width="100" x="420" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-23" parent="QwwwFRwHMWpIKF-98P1W-22" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="270" width="10" x="45" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-26" edge="1" parent="QwwwFRwHMWpIKF-98P1W-22" source="QwwwFRwHMWpIKF-98P1W-23" style="html=1;verticalAlign=bottom;endArrow=block;curved=1;rounded=0;" target="QwwwFRwHMWpIKF-98P1W-22" value="АвтоматическоеСписание()">
+          <mxGeometry relative="1" width="80" x="-0.1811" y="35" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="100" y="280" />
+              <mxPoint x="140" y="310" />
+            </Array>
+            <mxPoint x="140" y="192.99999999999977" as="sourcePoint" />
+            <mxPoint x="140" y="323.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-25" edge="1" parent="1" source="QwwwFRwHMWpIKF-98P1W-8" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="QwwwFRwHMWpIKF-98P1W-22" value="ПополнениеЕНС()">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="290" />
+            </Array>
+            <mxPoint x="340" y="280" as="sourcePoint" />
+            <mxPoint x="420" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-29" edge="1" parent="1" source="QwwwFRwHMWpIKF-98P1W-4" style="endArrow=none;dashed=1;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="150" y="190" as="sourcePoint" />
+            <mxPoint x="175" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QwwwFRwHMWpIKF-98P1W-30" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="174.8" y="210" as="sourcePoint" />
+            <mxPoint x="174.8" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
