@@ -87,7 +87,7 @@
 <a name="UML-anchor"></a>
 
 # UML Use Case
-![UML Use Case](https://github.com/user-attachments/assets/5c537a52-4408-4a29-aed3-71beea45e044)
+<img width="975" height="692" alt="UML Use Case 2-0 drawio" src="https://github.com/user-attachments/assets/888ff45a-447d-4320-a33d-cdc306fd4dfb" />
 
 # Диаграмма Деятельности
 <a name="Activity-anchor"></a>
