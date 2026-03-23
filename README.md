@@ -120,4 +120,9 @@
    <a name="Sequence-Block2"></a>
    <img width="405" height="342" alt="image" src="https://github.com/user-attachments/assets/93adf657-49ad-46c4-823b-64316e62acc2" />
 
+#### 3) Оформление налоговых платежей
+   <a name="Squence-Block3"></a>
+   <img width="512" height="442" alt="Squence Block 3 drawio" src="https://github.com/user-attachments/assets/afb4f3c0-3e13-4cf6-a3ac-2a33a168787d" />
+
+
 
