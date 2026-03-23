@@ -22,6 +22,7 @@
   * [Блок 1](#Sequence-Block1)
   * [Блок 2](#Sequence-Block2)
   * [Блок 3](#Sequence-Block3)
+  * [Блок 4](#Sequence-Block4)
 
 <a name="IDEF0-anchor"></a>
 
@@ -124,6 +125,11 @@
 #### 3) Оформление налоговых платежей
    <a name="Squence-Block3"></a>
    <img width="512" height="442" alt="Squence Block 3 drawio" src="https://github.com/user-attachments/assets/afb4f3c0-3e13-4cf6-a3ac-2a33a168787d" />
+
+#### 4) Оформление поступления
+   <a name="Squence-Block4"></a>
+   <img width="277" height="342" alt="image" src="https://github.com/user-attachments/assets/dab2bb66-689d-47a3-9135-2d12ee115b35" />
+
 
 
 
