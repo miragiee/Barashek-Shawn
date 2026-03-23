@@ -21,6 +21,7 @@
 4)[Sequence](#Squence-anchor)
   * [Блок 1](#Sequence-Block1)
   * [Блок 2](#Sequence-Block2)
+  * [Блок 3](#Sequence-Block3)
 
 <a name="IDEF0-anchor"></a>
 
