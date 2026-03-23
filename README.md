@@ -20,6 +20,7 @@
 
 4)[Sequence](#Squence-anchor)
   * [Блок 1](#Sequence-Block1)
+  * [Блок 2](#Sequence-Block2)
 
 <a name="IDEF0-anchor"></a>
 
@@ -114,4 +115,9 @@
 #### 1) Оформление данных клиента
    <a name="Sequence-Block1"></a>
    <img width="341" height="301" alt="Sequence Block1 drawio" src="https://github.com/user-attachments/assets/d517103e-1c6f-4567-9c30-feb8070b4a48" />
+   
+#### 2) Оформление заказа клиента
+   <a name="Sequence-Block2"></a>
+   <img width="405" height="342" alt="image" src="https://github.com/user-attachments/assets/93adf657-49ad-46c4-823b-64316e62acc2" />
+
 
