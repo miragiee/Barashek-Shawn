@@ -18,6 +18,9 @@
   * [Блок 2](#Activity-Block2)
   * [Блок 3](#Activity-Block3)
 
+4)[Sequence](#Squence-anchor)
+  * [Блок 1](#Sequence-Block1)
+
 <a name="IDEF0-anchor"></a>
 
 # **IDEF0**
@@ -105,4 +108,10 @@
    <a name ="Activity-Block3"></a>
    <img width="142" height="352" alt="image" src="https://github.com/user-attachments/assets/84a25c80-b1eb-4887-a045-3dd41526afd1" />
 
+# Диаграмма последовательности
+<a name ="Squence-anchor"></a>
+
+#### 1) Оформленеи данных клиента
+   <a name="Sequence-Block1"></a>
+   <img width="341" height="301" alt="Sequence Block1 drawio" src="https://github.com/user-attachments/assets/d517103e-1c6f-4567-9c30-feb8070b4a48" />
 
