@@ -3,3 +3,16 @@
 * {
     font-family: "Onest";
 }
+
+header {
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    list-style-type: none;
+}
