@@ -1,9 +1,12 @@
+/* Ссылка на фигму https://www.figma.com/design/SXm8IOV74uzrgzUa6LpgRW/%D0%A1%D0%BF%D0%B8%D1%80%D0%B8%D0%B4%D0%BE%D0%BD%D0%BE%D0%B2_%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD_%D0%91%D1%80%D0%B8%D1%84?node-id=241-888&t=V3mKlVaI8G5cTnNa-1 */
+/* Тут переменные  */
+
 :root{
     --black-color1: #252525;
     --black-color2: #222222;
     --black-color3: #090D10;
     --white-color: #fbfbfb;
-    --yellow-color: linear-gradient(#F8BF2F, #FFD059)
+    --yellow-color: linear-gradient(#F8BF2F, #FFD059);
 
     --big-text:24px;
     --normal-text:18px;
@@ -83,13 +86,13 @@ a {
     
 }
 
-.hero {
+.hero { 
     display: flex;
     flex-direction: row;
 
     margin: auto;
 
-    background-color: var(--black-color3);
+    background-color: var(--black-color3);  /* Надо переделать. Он должен быть градиентом ГРАДИЕНТ РАБОТАЕТ ТОЛЬКО С BACKGROUND-IMAGE */
     border-radius: 30px;
 
     align-items: center;
@@ -103,11 +106,12 @@ a {
     flex-direction: row;
 
     justify-content: center;
-    align-items: center;
+    align-items: center;    
     gap: 36.7px;
+
 }
 
-.heroButtons>button{
+.yellowButton{
     width: 200px;
     height: 60px;
 
@@ -115,6 +119,21 @@ a {
 
     font-size: var(--normal-text);
     font-weight: bold;
+
+    border: none;
+    border-radius: 20px;
+}
+.whiteButton{
+    width: 200px;
+    height: 60px;
+
+    background-color: var(--white-color);
+
+    font-size: var(--normal-text);
+    font-weight: bold;
+
+    border: none;
+    border-radius: 20px;
 }
 
 .describtion{
@@ -130,7 +149,7 @@ a {
 }
 
 h1{
-font-family: serif;
+    font-family: serif;
 
     text-align: center;
     font-size: 36px;
