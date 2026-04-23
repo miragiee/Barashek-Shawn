@@ -2,15 +2,18 @@
 /* Тут переменные  */
 
 :root{
-    --black-color1: #252525;
-    --black-color2: #222222;
-    --black-color3: #090D10;
+    --black-color: #252525;
     --white-color: #fbfbfb;
     --yellow-color: linear-gradient(#F8BF2F, #FFD059);
+    --yellow-color-hovered: linear-gradient(#FFCD4E, #FFE092);
 
-    --big-text:24px;
+    --h1-text:36px;
+    --h2-text:30px;
+    --h3-text:24px;
+    --big-text:20px;
     --normal-text:18px;
     --small-text:14px;
+    --button-text:18px;
 }
 
 * {
@@ -21,7 +24,7 @@ header {
     display: flex;
     flex-direction: row;
     
-    background-color: var(--black-color1);
+    background-color: var(--black-color);
 
     width: 100%;
     border-radius: 40px;
@@ -40,6 +43,12 @@ header>.buttons{
     gap: 31.65px;
 
     font-size: var(--normal-text);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 nav {
@@ -61,6 +70,37 @@ body {
 a {
     text-decoration: none;
     color: var(--white-color);
+}
+
+h1{
+    font-family: serif;
+
+    text-align: center;
+    font-size: var(--h1-text);
+
+    color: var(--white-color);
+}
+
+h2{
+    font-family: serif;
+
+    text-align: center;
+    font-size: var(--h2-text);
+    
+    color: var(--black-color);
+}
+
+h3{
+    font-family: serif;
+
+    text-align: center;
+    font-size: var(--h3-text);
+
+    color: var(--black-color);
+}
+
+p{
+    font-size: var(--normal-text);
 }
 
 .container  {
@@ -90,12 +130,11 @@ a {
     display: flex;
     flex-direction: row;
 
-    margin: auto;
-
-    background-color: var(--black-color3);  /* Надо переделать. Он должен быть градиентом ГРАДИЕНТ РАБОТАЕТ ТОЛЬКО С BACKGROUND-IMAGE */
+    background-color: var(--black-color);  /* Надо переделать. Он должен быть градиентом ГРАДИЕНТ РАБОТАЕТ ТОЛЬКО С BACKGROUND-IMAGE */
     border-radius: 30px;
 
     align-items: center;
+    justify-content: center;
 
     width: 1280px;
     height: 647px;
@@ -117,7 +156,7 @@ a {
 
     background-image: var(--yellow-color);
 
-    font-size: var(--normal-text);
+    font-size: var(--button-text);
     font-weight: bold;
 
     border: none;
@@ -148,16 +187,131 @@ a {
     text-align: center;
 }
 
-h1{
-    font-family: serif;
+.our-advantages{
+    display: flex;
+    flex-direction: column;
 
-    text-align: center;
-    font-size: 36px;
+    align-items: center;
+    justify-content: center;
 
+    gap: 20px;
+
+}
+
+.cards{
+    display: flex;
+    flex: row;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 60px;
+}
+
+.advantage-card{
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    height: 230px;
+
+    padding: 30px;
+
+    background-color: var(--black-color);
+    color: var(--white-color);
+
+    border: none;
+    border-radius: 50px;
+}
+
+.advantage-card>.card-header{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: left;
+    
+}
+
+.advantage-card>.card-header>img{
+    width: 65px;
+    height: 65px;
+}
+
+.advantage-card>.card-header>h3{
+    color: var(--white-color);
+    width: 200px;
+}
+
+.reviews{
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--black-color);
+
+    justify-content: top;
+    align-items: center;
+
+    height: 540px;
+    
+    padding-bottom: 30px;
+    gap: 10px;
+    
+}
+
+.reviews>h2{
     color: var(--white-color);
 }
 
+.reviews>.cards{
+    height: 432px;
+    width: 890px;
 
+    gap: 115px;
+}
 
+.review-card{
+    display: flex;
+    flex-direction: row;
 
+    background-color: var(--white-color);
+
+    padding: 30px;
+
+    border: none;
+    border-radius: 50px;
+
+    height: 370px;
+    width: 830px;
+}
+
+.review-card>.user-info{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+}
+
+.arrow-right{
+    width: 80px;
+    height: 50px;
+
+    background-color: var(--white-color);
+
+    border: none;
+    border-radius: 50px;
+}
+
+.arrow-left{
+    width: 80px;
+    height: 50px;
+
+    background-color: var(--white-color);
+
+    border: none;
+    border-radius: 50px;
+}
 
