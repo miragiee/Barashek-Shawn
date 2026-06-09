@@ -11,9 +11,9 @@ export default function Hero(){
                     <p>Лучший мясной ресторан в Санкт-Петербурге</p>
                     <p>Ул. Курляндская, 35</p>
                 </div>
-                <div>
-                    <a href="">Забронировать стол</a>
-                    <a href="">Заказать доставку</a>
+                <div className={styles.buttonContainer}>
+                    <div className={styles.abutton}><a href="">Забронировать стол</a></div>
+                    <div className={styles.bbutton}><a href="">Заказать доставку</a></div>
                 </div>
             </div>
         </div>

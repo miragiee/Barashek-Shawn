@@ -49,3 +49,50 @@
 .heroFunc p {
     margin: 5px 0;
 }
+
+.abutton {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    
+    width: 200px;
+    height: 60px;
+    
+    border-radius: 15px;
+
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+}
+
+.abutton > a {
+    text-decoration: none;
+    color: black;
+}
+    
+.bbutton {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 60px;
+    
+    border-radius: 15px;
+
+    background: white;
+}   
+
+.bbutton > a {
+    text-decoration: none;
+    color: black;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    
+    gap: 37.62px;
+    margin-top: 31.74px;
+}
