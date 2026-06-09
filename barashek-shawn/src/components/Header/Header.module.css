@@ -3,13 +3,61 @@ header{
     flex-direction: row;
     
     align-self: center;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     background-color: #252525;
 
     width: 1280px;
-    height: 63px;
+    height: 50px;
 
-    margin: 40px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left:25px;
+    padding-right: 25px;
+
+    border-radius: 50px;
+}
+
+.logo{
+    width: 40px;
+    height: auto;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 32px;
+}
+
+li{
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    
+    background: linear-gradient(to right, #F8BF2F, #FFD059) no-repeat right/0% 100%, white;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    transition: background-size 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+a:hover {
+    background-position: left;
+    background-size: 100% 100%;
 }
