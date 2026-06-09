@@ -1,0 +1,63 @@
+.advantages{
+    display: flex;
+    flex-direction: column;
+
+    width: 1280px;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 40px;
+}
+
+.advantages>h2{
+    font-size: 30px;
+}
+
+.blockContent{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 58px;
+
+    margin-top: 82px;
+}
+
+.advantageCard{
+    display: felx;
+    flex-direction: column;
+
+    width: 300px;
+    height: 200px;
+
+    background: radial-gradient(circle at 50%, #252525, #222222);
+    color: white;
+
+    border-radius: 50px;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+}
+
+.cardHeader{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: left;
+    gap: 40px;
+
+    font-size: 24px;
+}
+
+.advantageCard > p{
+    font-size: 18px;
+}
