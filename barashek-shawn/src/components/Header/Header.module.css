@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    flex-direction: row;
+    
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #252525;
+
+    width: 1280px;
+    height: 63px;
+
+    margin: 40px;
+}
