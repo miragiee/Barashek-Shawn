@@ -1,0 +1,51 @@
+.hero{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 1280px;
+    height: 647px;
+
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0px;
+
+    border-radius: 50px;
+
+    background: linear-gradient(90deg, #2D3236 0%, #090D10 60%);
+
+    overflow: hidden;
+}
+
+.heroImg{
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.heroFunc{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+
+    flex-grow: 1;
+}
+
+.heroFunc h1 {
+    margin: 0 0 15px 0;
+}
+
+.heroFunc p {
+    margin: 5px 0;
+}
