@@ -1,0 +1,93 @@
+.Reviews {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto ;
+
+    width: 1280px;
+}
+
+.blockHeader{
+    font-size: 30px;
+
+    margin-bottom: 80px;
+}
+
+.ReviewContainer {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: start;
+
+    padding: 40px;
+    margin: auto;
+    border-radius: 20px;
+
+    width: 800px;
+    height: 400px;
+
+    background: linear-gradient(90deg, #2D3236 0%, #090D10 60%);
+    color: white;
+}
+
+.PersonalInfo {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.PersonalInfo>h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.PersonalInfo>img {
+    width: 100px;
+    height: auto;
+
+    border-radius: 20px;
+}
+
+.ReviewContent {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.Stars{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.ReviewText{
+    align-items: left;
+    justify-content: center;
+}
+
+.ReviewText>p{
+    font-size: 18px;
+    font-style: normal;
+
+    text-align: left;
+}
+
+.PhotoBlock{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.PhotoBLock>img{
+    width: 50px;
+    height: auto;
+}
