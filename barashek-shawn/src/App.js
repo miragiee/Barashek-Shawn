@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Advantages from './components/Advantages/Advantages';
 import Reviews from './components/Reviews/Reviews';
+import DishCard from './components/DishCard/DishCard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Hero/>
       <Advantages/>
       <Reviews/>
+      <DishCard/>
       <img src={backgroundLogo} className='backgroundLogo'></img>
     </div>
 

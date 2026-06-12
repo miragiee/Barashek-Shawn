@@ -1,0 +1,54 @@
+.CardContainer {
+    display: flex;
+    flex-direction: column;
+
+    width: 200px;
+    height: 300px;
+
+    border-radius: 20px;
+    background: linear-gradient(90deg, #2D3236 0%, #090D10 60%);
+
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+
+    padding-bottom: 15px;
+}
+
+.DishPhoto {
+    width: 200px;
+    height: 200px;
+
+    padding-bottom: 5px;
+}
+
+.DishName{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.DishPrice {
+    font-size: 14px;
+    font-weight: lighter;
+
+    padding-bottom: 5px;
+}
+
+.BuyButton {
+    width: 120px;
+    height: 50px;
+
+    border-radius: 10px;
+    border: none;
+
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.BuyButton:hover{
+    cursor: pointer;
+    background: linear-gradient(90deg, #f2d790 0%, #FFD059 100%);
+}
