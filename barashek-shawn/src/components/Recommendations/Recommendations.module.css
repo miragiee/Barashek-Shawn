@@ -1,0 +1,45 @@
+.RecommendationBlock {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+}
+
+.RecommendationBlock>h2 {
+    font-size: 30px;
+}
+
+.BlockContent{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+}
+
+.CardBlock{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+}
+
+.MoveLeft {
+    width: 60px;
+    height: 60px;
+}
+
+.MoveRight {
+    width: 60px;
+    height: 60px;
+}

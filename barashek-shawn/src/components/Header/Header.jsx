@@ -1,4 +1,4 @@
-import styles from './Header.module.css'
+import styles from './Header.module.css';
 import logo from '../../assets/images/logo.svg';
 import shcart from '../../assets/images/Button 5.svg';
 import pfp from '../../assets/images/Button 6.svg';
