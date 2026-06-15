@@ -18,10 +18,12 @@
     display: flex;
     flex-direction: row;
 
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
-    gap: 40px;
+    width: 1280px;
+
+    gap: 58px;
 }
 
 .CardBlock{
@@ -31,15 +33,42 @@
     justify-content: center;
     align-items: center;
 
-    gap: 40px;
+    gap: 58px;
 }
 
-.MoveLeft {
+/* Общие стили для обеих кнопок, чтобы не дублировать код */
+.MoveLeft, .MoveRight {
+    display: flex; /* Включаем flex, чтобы иконка внутри встала по центру */
+    justify-content: center;
+    align-items: center;
+
     width: 60px;
     height: 60px;
+    flex-shrink: 0; /* Жестко запрещаем сжимать кнопки по ширине */
+
+    border: none;
+    border-radius: 50px;
+    background-color: #222222;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Плавная анимация */
+}
+
+/* Эффект при наведении курсора */
+.MoveLeft:hover, .MoveRight:hover {
+    background-color: #333333;
+}
+
+/* Эффект при клике (слегка уменьшаются) */
+.MoveLeft:active, .MoveRight:active {
+    transform: scale(0.95);
+}
+
+/* Индивидуальные отступы */
+.MoveLeft {
+    margin-left: 17px;
 }
 
 .MoveRight {
-    width: 60px;
-    height: 60px;
+    margin-right: 17px;
 }
