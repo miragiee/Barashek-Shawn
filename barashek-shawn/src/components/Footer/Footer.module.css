@@ -1,0 +1,77 @@
+/* Внешний темный контейнер футера */
+.footerBackground {
+    width: 1280px;
+    height: 256px; /* Высота ровно в 2 раза меньше блока бронирования для баланса */
+    
+    margin: 40px auto 0 auto; /* Отступ 40px сверху и центрирование по горизонтали */
+    
+    background: radial-gradient(circle, #252525 0%, #222222 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+    
+    border-radius: 20px 20px 0px 0px; /* Фирменное закругление 20px */
+    box-sizing: border-box;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ограничитель внутреннего контента */
+.footerContent {
+    width: 1200px; /* Оставляем охранные поля по бокам */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Секция логотипа */
+.logoSection {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    width: 40px; /* Установили точную ширину 40px */
+    height: auto;
+    object-fit: contain;
+}
+
+
+/* Контейнер для 4-х колонок */
+.linksContainer {
+    display: flex;
+    gap: 60px; /* Отступы между колонками */
+}
+
+/* Стили для отдельной колонки */
+.linkColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Расстояние между ссылками внутри колонки */
+}
+
+/* Заголовки колонок */
+.linkColumn h4 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+/* Текстовые ссылки */
+.linkColumn a {
+    color: #b3b3b3;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    line-height: 1.4;
+    
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Эффект подсвечивания при наведении в цвет кнопки */
+.linkColumn a:hover {
+    color: #FFD059;
+    transform: translateX(2px); /* Элегантный сдвиг вправо при наведении */
+}

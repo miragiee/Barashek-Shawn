@@ -71,7 +71,6 @@
     /* ДОБАВИЛИ: Настройки шрифта в точности как у кнопки */
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 18px;
-    font-weight: 600;
 }
 
 .formContainer input::placeholder {

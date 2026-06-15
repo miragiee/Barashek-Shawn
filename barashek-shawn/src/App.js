@@ -8,6 +8,7 @@ import Advantages from './components/Advantages/Advantages';
 import Reviews from './components/Reviews/Reviews';
 import Recommendations from './components/Recommendations/Recommendations';
 import BookingForm from './components/BookingForm/BookingForm';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Reviews/>
       <Recommendations/>
       <BookingForm/>
+      <Footer/>
       <img src={backgroundLogo} className='backgroundLogo'></img>
     </div>
 
