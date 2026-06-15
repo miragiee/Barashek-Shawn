@@ -1,0 +1,140 @@
+/* Чёрный контейнер-подложка */
+.blackBackground {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    
+    width: 1280px;
+    height: 512px;
+    
+    margin: 120px auto 120px auto; 
+    
+    background: radial-gradient(circle, #252525 0%, #222222 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+    
+    border-radius: 20px; 
+}
+
+/* Белая карточка формы */
+.whiteCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 805px;
+    height: 438px; 
+    
+    background-color: #fbfbfb;
+    border-radius: 20px; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    
+    padding-top: 40px; 
+}
+
+/* Заголовок формы */
+.whiteCard h2 {
+    font-size: 32px;
+    color: #1a1a1a;
+    font-weight: 700;
+    
+    margin-top: 0px;
+    margin-bottom: 24px; 
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 1;
+}
+
+/* Контейнер для элементов формы */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px; 
+}
+
+/* Общие стили для полей ввода и селекта */
+.formContainer input,
+.formContainer select {
+    width: 600px;
+    height: 50px;
+    background-color: #222222;
+    border: none;
+    border-radius: 25px; 
+    padding: 0 24px;
+    color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+    
+    /* ДОБАВИЛИ: Текст при вводе теперь пишется строго по центру */
+    text-align: center; 
+    
+    /* ДОБАВИЛИ: Настройки шрифта в точности как у кнопки */
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.formContainer input::placeholder {
+    color: #888888;
+    text-align: center; 
+}
+
+/* Стилизация выпадающего списка */
+.selectWrapper {
+    position: relative;
+    width: 600px;
+    height: 50px;
+}
+
+.formContainer select {
+    width: 100%;
+    height: 100%;
+    appearance: none; 
+    cursor: pointer;
+    text-align-last: center; 
+    
+    /* Сдвигаем внутренний отступ справа, чтобы текст не наезжал на стрелочку */
+    padding-right: 50px; 
+}
+
+/* Кастомная стрелочка в блоке "Выберите столик" */
+.selectWrapper::before {
+    content: '';
+    position: absolute;
+    
+    /* Выравниваем стрелочку по центру вертикали */
+    top: 50%;
+    transform: translateY(-65%) rotate(45deg);
+    
+    /* Смещаем к правому краю, создавая симметричный интерфейс */
+    right: 30px; 
+    
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    pointer-events: none;
+}
+
+/* Кнопка отправки */
+.submitButton {
+    width: 600px;
+    height: 60px;
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+    border: none;
+    border-radius: 20px;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+.submitButton:hover {
+    opacity: 0.95;
+}
+
+.submitButton:active {
+    transform: scale(0.99);
+}
