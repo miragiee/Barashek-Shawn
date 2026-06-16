@@ -4,7 +4,7 @@ import dishPlaceholder from '../../assets/images/dish_placeholder.png';
 
 export default function DishCard({ id, name, price, imageUrl }) {
     return (
-        <Link to="/dish" className={styles.CardContainer}>
+        <Link to="/DishPage" className={styles.CardContainer}>
             <img 
                 src={imageUrl ? imageUrl : dishPlaceholder} 
                 alt={name || "Блюдо"} 

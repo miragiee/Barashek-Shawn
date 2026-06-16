@@ -1,4 +1,4 @@
-import styles from './DishPageContent.module.css`'
+import styles from './DishPageContent.module.css'
 import placeHolder from '../../assets/images/kebab_placeholder1.png'
 
 export default function DishPageContent(){
