@@ -12,7 +12,6 @@ export default function Header(){
                     <li><a href="">Главная</a></li>
                     <li><a href="">Забронировать</a></li>
                     <li><a href="">Каталог</a></li>
-                    <li><a href="">Дегустации</a></li>
                     <li><a href=""><img src={shcart} alt="Корзина" /></a></li>
                     <li><a href=""><img src={pfp} alt="Профиль" /></a></li>
                 </ul>
