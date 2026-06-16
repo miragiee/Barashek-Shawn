@@ -1,0 +1,83 @@
+.DishPageMain {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 1280px;
+}
+
+
+.NavigationBlock {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    align-items: center;
+
+    width: 1280px;
+
+    margin-bottom: 40px;
+}
+
+.NavigationBlock>h2 {
+    font-size: 30px;
+    font-weight: bold;
+
+
+.DishCard {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items:start;
+
+    width: 500px;
+    height: 468px;
+
+    gap: 10px;
+}
+
+.DishDescription {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: start;
+
+    gap: 10px;
+
+    font-size: 18px;
+    font-weight: normal;
+    
+}
+
+.AddToCartBlock {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 93px;
+}
+
+.Price {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.AddToCartBtn {
+    width: 300px;
+    height: 60px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+}
+
