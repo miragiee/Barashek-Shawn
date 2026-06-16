@@ -28,8 +28,6 @@ export default function Recommendations() {
                 setLoading(false);
             });
     }, []);
-    
-    
 
     if (loading) {
         return <div className={styles.RecommendationBlock}><h2>Загрузка...</h2></div>;
