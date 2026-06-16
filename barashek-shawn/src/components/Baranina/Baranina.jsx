@@ -37,7 +37,7 @@ export default function Baranina() {
 
     return (
         <div className={styles.BaraninaBlock}>
-            <h2>Говядина</h2>
+            <h2>Баранина</h2>
             <div className={styles.BlockContent}>
                 <button className={styles.MoveLeft}>
                     <img src={arrowLeft} alt="Предыдущий" />

@@ -37,7 +37,7 @@ export default function Svinina() {
 
     return (
         <div className={styles.SvininaBlock}>
-            <h2>Рекомендуемые блюда</h2>
+            <h2>Свинина</h2>
             <div className={styles.BlockContent}>
                 <button className={styles.MoveLeft}>
                     <img src={arrowLeft} alt="Предыдущий" />
