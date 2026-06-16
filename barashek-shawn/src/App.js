@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import Catalog from './pages/Catalog';
 import DishPage from './pages/DishPage';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/DishPage" element={<DishPage/>}/>
         <Route path="/Catalog" element={<Catalog/>}/>
+        <Route path="/Login" element={<Login/>}/>
       </Routes>
     </div>
   );
