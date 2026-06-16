@@ -6,6 +6,9 @@
     align-items: center;
 
     width: 1280px;
+
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -13,12 +16,13 @@
     display: flex;
     flex-direction: row;
 
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 
     width: 1280px;
 
     margin-bottom: 40px;
+
 }
 
 .NavigationBlock>h2 {
@@ -37,6 +41,16 @@
     height: 468px;
 
     gap: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.DishCard>img{
+    width: 500px;
+    height: 334px;
+
+    border-radius: 30px;
 }
 
 .DishDescription {
