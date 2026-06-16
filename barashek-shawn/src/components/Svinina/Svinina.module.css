@@ -1,0 +1,74 @@
+.SvininaBlock {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+}
+
+.SvininaBlock>h2 {
+    font-size: 30px;
+}
+
+.BlockContent{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 1280px;
+
+    gap: 58px;
+}
+
+.CardBlock{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 58px;
+}
+
+/* Общие стили для обеих кнопок, чтобы не дублировать код */
+.MoveLeft, .MoveRight {
+    display: flex; /* Включаем flex, чтобы иконка внутри встала по центру */
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0; /* Жестко запрещаем сжимать кнопки по ширине */
+
+    border: none;
+    border-radius: 50px;
+    background-color: #222222;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Плавная анимация */
+}
+
+/* Эффект при наведении курсора */
+.MoveLeft:hover, .MoveRight:hover {
+    background-color: #333333;
+}
+
+/* Эффект при клике (слегка уменьшаются) */
+.MoveLeft:active, .MoveRight:active {
+    transform: scale(0.95);
+}
+
+/* Индивидуальные отступы */
+.MoveLeft {
+    margin-left: 17px;
+}
+
+.MoveRight {
+    margin-right: 17px;
+}
