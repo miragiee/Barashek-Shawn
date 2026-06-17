@@ -36,16 +36,13 @@
 .header {
     width: 1280px;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: flex-start;
-
-    gap: 350px;
 
     margin-top: 0;
 }
 
-/* BACK BUTTON */
 .backButton {
     display: flex;
     align-items: center;
@@ -59,9 +56,7 @@
     font-weight: 400;
     color: #000;
 
-    position: static;
-
-    text-decoration: none;
+    justify-self: start;
 }
 
 .backButton img {
@@ -73,6 +68,8 @@
 .logo {
     width: 96px;
     height: 96px;
+
+    justify-self: center;
 }
 
 /* MAIN BLOCK */
