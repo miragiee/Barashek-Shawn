@@ -21,7 +21,6 @@ function App() {
         <Route path="/Login" element={<Login/>}/>
         <Route path="/PaymentMethod" element={<PaymentMethod/>}/>
         <Route path="/Cart" element={<Cart/>}/>
-        <Route path="/Login" element={<Login/>}/> 
       </Routes>
     </div>
   );
