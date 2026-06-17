@@ -6,6 +6,7 @@ import vtbIcon from "../assets/icons/vtb.svg";
 import sberIcon from "../assets/icons/sber.svg";
 import tbankIcon from "../assets/icons/tbank.svg";
 import goBackArrow from "../assets/icons/go_back_arrow.svg";
+import { Link } from "react-router-dom";
 
 const banks = [
     {
@@ -33,10 +34,10 @@ export default function PaymentMethod() {
 
                 {/* HEADER */}
                 <div className={styles.header}>
-                    <button className={styles.backButton}>
+                    <Link to="/Cart" className={styles.backButton}>
                         <img src={goBackArrow} alt="Назад" />
                         <span>Вернуться в корзину</span>
-                    </button>
+                    </Link>
 
                     <img
                         src={logoDark}
