@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 export default function Header(){
     return(
         <header>
-            <img src={logo} alt="Logo" className={styles.logo}/>
+            <Link to="/"><img src={logo} alt="Logo" className={styles.logo}/></Link>
             <nav>
                 <ul>
                     
@@ -18,7 +18,7 @@ export default function Header(){
                     <li><Link to="/Catalog">Каталог</Link></li>
                     <li><a href="">Дегустации</a></li>
                     <li><a href=""><img src={shcart} alt="Корзина" /></a></li>
-                    <li><a href=""><img src={pfp} alt="Профиль" /></a></li>
+                    <li><Link to="/Login"><img src={pfp} alt="Профиль" /></Link></li>
                 </ul>
             </nav>
         </header>
