@@ -1,0 +1,172 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.page::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background-image: url("../../assets/icons/BackgroundLogo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* HEADER */
+.header {
+    width: 1280px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 350px;
+
+    margin-top: 0;
+}
+
+/* BACK BUTTON */
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+
+    position: static;
+}
+
+.backButton img {
+    width: 35px;
+    height: 35px;
+}
+
+/* LOGO */
+.logo {
+    width: 96px;
+    height: 96px;
+}
+
+/* MAIN BLOCK */
+.paymentBlock {
+    width: 1030px;
+    height: 515px;
+
+    margin-top: 130px;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.leftColumn {
+    width: 660px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qrColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin: 0 0 30px;
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    color: #000;
+}
+
+.bankList {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.bankButton {
+    width: 300px;
+    height: 48px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #d9d9d9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d1d1d;
+}
+
+.bankIcon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.payButton {
+    width: 580px;
+    height: 60px;
+
+    margin-top: auto;
+
+    border: none;
+    border-radius: 16px;
+
+    background: linear-gradient(
+        90deg,
+        #f8bf2f 0%,
+        #ffd059 100%
+    );
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #000;
+}
+
+.qrImage {
+    width: 340px;
+    height: 340px;
+    object-fit: contain;
+}

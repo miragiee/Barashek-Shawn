@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 import Header from "../components/Header/Header";
-import styles from "./Login.module.css";
-
+import styles from "./styles/Login.module.css";
 export default function Login () {
     return (
         <div className={styles.LoginPage}>
