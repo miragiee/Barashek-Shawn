@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './Recommendations.module.css';
 import DishCard from '../DishCard/DishCard';
-import arrowLeft from '../../assets/images/button_arrow_left.svg';
-import arrowRight from '../../assets/images/button_arrow_right.svg';
+import arrowLeft from '../../assets/icons/button_arrow_left.svg';
+import arrowRight from '../../assets/icons/button_arrow_right.svg';
 
 export default function Recommendations() {
     const [dishes, setDishes] = useState([]);

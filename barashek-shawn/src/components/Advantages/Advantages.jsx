@@ -1,7 +1,7 @@
 import styles from './Advantages.module.css';
-import medal from '../../assets/images/ri_medal-fill.svg';
-import target from '../../assets/images/mingcute_target-line.svg';
-import money from '../../assets/images/tabler_moneybag.svg';
+import medal from '../../assets/icons/ri_medal-fill.svg';
+import target from '../../assets/icons/mingcute_target-line.svg';
+import money from '../../assets/icons/tabler_moneybag.svg';
 
 export default function Advantages(){
     return(

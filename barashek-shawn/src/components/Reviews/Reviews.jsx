@@ -1,11 +1,11 @@
 import styles from './Reviews.module.css'
-import pfp from '../../assets/images/avatar_palceholder.svg'
-import reviewStar from '../../assets/images/review_star.svg'
+import pfp from '../../assets/icons/avatar_palceholder.svg'
+import reviewStar from '../../assets/icons/review_star.svg'
 import kebab1 from '../../assets/images/kebab_placeholder1.png'
 import kebab2 from '../../assets/images/kebab_placeholder2.png'
 import kebab3 from '../../assets/images/kebab_placeholder3.png'
-import arrowLeft from '../../assets/images/button_arrow_left.svg'
-import arrowRight from '../../assets/images/button_arrow_right.svg'
+import arrowLeft from '../../assets/icons/button_arrow_left.svg'
+import arrowRight from '../../assets/icons/button_arrow_right.svg'
 
 export default function Reviews(){
     return(
