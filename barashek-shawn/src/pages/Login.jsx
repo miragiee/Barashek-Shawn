@@ -10,7 +10,7 @@ export default function Login () {
             <div className={styles.Inputs}>
                 <input placeholder="Почта" type="text" className={styles.InputBar}/>
                 <input placeholder="Пароль" type="text" className={styles.InputBar}/>
-                <button  type="submit" className={styles.EnterButton}>Войти</button>
+                <button type="submit" className={styles.EnterButton}>Войти</button>
             </div>
 
             <div className={styles.UsefullLinks}>

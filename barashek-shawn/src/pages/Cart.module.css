@@ -1,0 +1,191 @@
+/* Главный контейнер */
+.order-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    gap: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    margin: 20px auto; /* Центрирование контейнера */
+}
+
+/* Левая колонка: Корзина */
+.cart-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.item-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.item-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.item-price {
+    font-size: 16px;
+    color: #666;
+}
+
+.quantity-label {
+    font-size: 14px;
+    color: #999;
+    margin-top: 4px;
+}
+
+/* Управление количеством */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.btn-deletee {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+.btn-minus, .btn-plus {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    padding: 0 5px;
+}
+
+.quantity-value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Итоговый блок слева */
+.summary-block {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.total {
+    font-weight: bold;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+/* Правая колонка: Форма */
+.form-section {
+    flex: 1;
+    background-color: #1a1a1a;
+    border-radius: 28px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    background-color: #cccccc;
+    border: none;
+    border-radius: 20px;
+    padding: 14px 20px;
+    font-size: 14px;
+    color: #333333;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #666666;
+}
+
+/* Кнопка Заказать */
+.btn-submit {
+    background-color: #f7c863;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 15px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: auto;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #e5b854;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .order-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .form-group {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    .form-group label {
+        padding-left: 10px;
+    }
+}
