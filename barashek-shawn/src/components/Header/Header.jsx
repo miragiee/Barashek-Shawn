@@ -1,7 +1,7 @@
 import styles from './Header.module.css';
-import logo from '../../assets/images/logo.svg';
-import shcart from '../../assets/images/Button 5.svg';
-import pfp from '../../assets/images/Button 6.svg';
+import logo from '../../assets/icons/logo.svg';
+import shcart from '../../assets/icons/Button 5.svg';
+import pfp from '../../assets/icons/Button 6.svg';
 import { Link } from 'react-router-dom';
 
 

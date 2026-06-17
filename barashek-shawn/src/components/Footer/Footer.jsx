@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.css';
-import Logo from '../../assets/images/logo.svg'; // Путь к вашему логотипу барана
+import Logo from '../../assets/icons/logo.svg'; // Путь к вашему логотипу барана
 
 export default function Footer() {
     return (
