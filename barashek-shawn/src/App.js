@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage';
 import Catalog from './pages/Catalog';
 import DishPage from './pages/DishPage';
 import Login from './pages/Login';
+import PaymentMethod from './pages/PaymentMethod';
 import Cart from './pages/Cart';
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
           <Route path="/" element={<MainPage/>}/>
           <Route path="/DishPage" element={<DishPage/>}/>
           <Route path="/Catalog" element={<Catalog/>}/>
+          <Route path="/Login" element={<Login/>}/>
+          <Route path="/PaymentMethod" element={<PaymentMethod/>}/>
           <Route path="/Cart" element={<Cart/>}/>
-          <Route path="/Login" element={<Login/>}/> 
         </Routes>
       </div>
     </div>
