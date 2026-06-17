@@ -1,6 +1,9 @@
 import Header from "../components/Header/Header";
 import styles from "./Cart.module.css";
 
+import hinkali from "../assets/images/hinkali.png";
+import shashlik from "../assets/images/shashlik.png";
+
 export default function Cart() {
     return (
         <div>
@@ -13,7 +16,7 @@ export default function Cart() {
 
                         {/* <!-- Хинкали --> */}
                         <div className={styles['cart-item']}>
-                            <img src="https://unsplash.com" alt="Хинкали" className={styles['item-img']}/>
+                            <img src={hinkali} alt="Хинкали" className={styles['item-img']}/>
                             <div className={styles['item-details']}>
                                 <div className={styles['item-title']}>Хинкали</div>
                                 <div className={styles['item-price']}>500₽</div>
@@ -29,7 +32,7 @@ export default function Cart() {
 
                         {/* <!-- Шашлык --> */}
                         <div className={styles['cart-item']}>
-                            <img src="https://unsplash.com" alt="Шашлык" className={styles['item-img']} />
+                            <img src={shashlik} alt="Шашлык" className={styles['item-img']} />
                             <div className={styles['item-details']}>
                                 <div className={styles['item-title']}>Шашлык</div>
                                 <div className={styles['item-price']}>500₽</div>

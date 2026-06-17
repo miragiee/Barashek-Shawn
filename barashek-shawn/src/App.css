@@ -1,13 +1,25 @@
-.backgroundLogo{
-  position: fixed;
+.App {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
 
+/* Настройки фонового логотипа */
+.backgroundLogo {
+  position: fixed;
   width: 1500px;
   height: auto;
-
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -35%);
+  z-index: 0;                /* Переносим на нижний слой */
+  pointer-events: none;      /* Позволяет кликать сквозь логотип на кнопки сайта */
+  user-select: none;         /* Запрещает случайно выделять картинку мышкой */
+}
 
-  z-index: -1;
+/* Контейнер для страниц сайта */
+.app-content {
+  position: relative;
+  z-index: 1;                /* Гарантирует, что контент страниц будет НАД фоном */
+  width: 100%;
 }
