@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+// Импортируем HashLink для работы с якорными ссылками
+import { HashLink } from 'react-router-hash-link';
 import styles from './Header.module.css';
 import logo from '../../assets/icons/logo.svg';
 import shcart from '../../assets/icons/Button 5.svg';
@@ -35,7 +37,12 @@ export default function Header() {
             <nav>
                 <ul className={styles.navList}>
                     <li><Link to="/">Главная</Link></li>
-                    <li><Link to="/Reservations">Забронировать</Link></li>
+                    
+                    {/* Используем HashLink с атрибутом smooth для плавной анимации скролла */}
+                    <li>
+                        <HashLink smooth to="/#booking">Забронировать</HashLink>
+                    </li>
+                    
                     <li><Link to="/Catalog">Каталог</Link></li>
                     <li>
                         <Link to="/Cart">
@@ -46,7 +53,6 @@ export default function Header() {
                     {/* Динамический блок авторизации */}
                     {user ? (
                         <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            {/* Когда авторизован: ведет на страницу профиля */}
                             <Link to="/Profile" title={`Личный кабинет: ${user.first_name}`}>
                                 <img src={pfp} alt="Профиль" />
                             </Link>
@@ -70,7 +76,6 @@ export default function Header() {
                         </li>
                     ) : (
                         <li>
-                            {/* Когда НЕ авторизован: ведет на страницу входа */}
                             <Link to="/Login">
                                 <img src={pfp} alt="Профиль" />
                             </Link>

@@ -21,7 +21,7 @@ export default function BookingForm() {
     };
 
     return (
-        <div className={styles.blackBackground}>
+        <div id="booking" className={styles.blackBackground}>
             <div className={styles.whiteCard}>
                 <h2>Забронировать Стол</h2>
                 

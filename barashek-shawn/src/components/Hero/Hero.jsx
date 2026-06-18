@@ -1,4 +1,6 @@
 import styles from './Hero.module.css'
+
+import { HashLink } from 'react-router-hash-link';
 import heroImg from '../../assets/images/HeroSteak.png'
 
 export default function Hero(){
@@ -12,7 +14,7 @@ export default function Hero(){
                     <p>Ул. Курляндская, 35</p>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <div className={styles.abutton}><a href="">Забронировать стол</a></div>
+                    <div className={styles.abutton}><HashLink smooth to="/#booking">Забронировать стол</HashLink></div>
                     <div className={styles.bbutton}><a href="">Заказать доставку</a></div>
                 </div>
             </div>
