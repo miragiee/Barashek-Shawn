@@ -14,6 +14,7 @@ import PasswordRecoveryStage1 from './pages/PasswordRecoveryStage1';
 import PasswordRecoveryStage2 from './pages/PasswordRecoveryStage2';
 import Profile from './pages/Profile';
 import PaymentSuccess from './pages/PaymentSuccess'
+import AdminPanel from './Admin/AdminPanel';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       {/* 2. Оборачиваем роутер в контейнер для управления слоями */}
       <div className="app-content">
         <Routes>
+          {/* User */}
           <Route path="/" element={<MainPage/>}/>
           <Route path="/DishPage" element={<DishPage/>}/>
           <Route path="/Catalog" element={<Catalog/>}/>
@@ -39,6 +41,10 @@ function App() {
           <Route path="/PasswordRecoveryStage2" element={<PasswordRecoveryStage2/>}/>
           <Route path="/Profile" element={<Profile/>}/>
           <Route path="/PaymentSuccess" element={<PaymentSuccess/>}/>
+
+          {/* Admin */}
+          <Route path="/AdminPanel" element={<AdminPanel/>}/>
+          
         </Routes>
       </div>
     </div>

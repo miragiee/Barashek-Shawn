@@ -1,0 +1,223 @@
+/* Главный контейнер админки в темных тонах сайта */
+.adminLayout {
+    display: flex;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #121212; /* Фирменный глубокий черный фон */
+    color: #ffffff;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    background-color: #1a1a1a; /* Графитовые карточки/блоки */
+    color: #ffffff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-right: 1px solid #2a2a2a;
+}
+
+.sidebar h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    padding-left: 10px;
+    color: #ffc107; /* Янтарно-золотой акцент как на кнопках сайта */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menuItem {
+    width: 140px;
+    height: 20px;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-radius: 12px; /* Фирменное скругление блоков */
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+    color: #aaaaaa;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.menuItem:hover {
+    background-color: #262626;
+    color: #ffffff;
+}
+
+.menuItemActive {
+    background-color: #ffc107; /* Активный пункт меню залит золотом */
+    color: #121212 !important; /* Текст на золоте становится темным */
+    font-weight: 600;
+}
+
+/* Контентная зона */
+.contentArea {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.panelTitle {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.sectionTitle {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: #ffc107; /* Подзаголовки выделены золотым цветом */
+}
+
+/* Уведомления */
+.alert {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.alertError {
+    background-color: #721c24;
+    color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.alertSuccess {
+    background-color: #155724;
+    color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+/* Скругленные карточки (как блок "Отзывы" и "Забронировать") */
+.card {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 32px;
+    border: 1px solid #2a2a2a;
+}
+
+/* Элементы форм ввода */
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #cccccc;
+}
+
+.inputField {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #262626; /* Темный фон полей ввода */
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+/* Кнопки — копия стиля кнопок "Заказать доставку" и "Подтвердить Бронь" */
+.btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btnPrimary {
+    background-color: #ffc107; /* Золотая заливка кнопки */
+    color: #121212;
+}
+
+.btnPrimary:hover {
+    background-color: #e0a800;
+}
+
+/* Стилизация таблиц под темную тему */
+.tableContainer {
+    overflow-x: auto;
+}
+
+.crudTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 8px;
+}
+
+.crudTable th {
+    background-color: #262626;
+    color: #ffc107;
+    text-align: left;
+    padding: 16px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #3a3a3a;
+}
+
+/* Закругление углов шапки таблицы */
+.crudTable th:first-child { border-top-left-radius: 12px; }
+.crudTable th:last-child { border-top-right-radius: 12px; }
+
+.crudTable td {
+    padding: 16px;
+    border-bottom: 1px solid #2a2a2a;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.crudTable tbody tr:hover {
+    background-color: #222222;
+}
+
+.emptyRow {
+    text-align: center;
+    color: #666666;
+    padding: 40px !important;
+}
+
+.codeBadge {
+    background-color: #262626;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: monospace;
+    color: #ffc107;
+    border: 1px solid #3a3a3a;
+}
