@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CategoriesCRUD from "./pages/CategoriesCRUD";
-import ProductsCRUD from "./pages/ProductCRUD"; // 1. Импортируем новый компонент товаров
+import ProductsCRUD from "./pages/ProductCRUD";
+import ReservationsCRUD from "./pages/ReservationCRUD";
+import ReviewsCRUD from "./pages/ReviewCRUD";
 import styles from "./AdminStyles.module.css";
 
 export default function AdminPanel() {
@@ -13,16 +15,28 @@ export default function AdminPanel() {
                 <h3>Панель Админа</h3>
                 <ul className={styles.menuList}>
                     <li 
+                        className={`${styles.menuItem} ${activeTab === "products" ? styles.menuItemActive : ""}`}
+                        onClick={() => setActiveTab("products")}
+                    >
+                        📦 Товары
+                    </li>
+                    <li 
                         className={`${styles.menuItem} ${activeTab === "categories" ? styles.menuItemActive : ""}`}
                         onClick={() => setActiveTab("categories")}
                     >
                         📁 Категории
                     </li>
                     <li 
-                        className={`${styles.menuItem} ${activeTab === "products" ? styles.menuItemActive : ""}`}
-                        onClick={() => setActiveTab("products")}
+                        className={`${styles.menuItem} ${activeTab === "reservations" ? styles.menuItemActive : ""}`}
+                        onClick={() => setActiveTab("reservations")}
                     >
-                        📦 Товары
+                        📅 Бронирование
+                    </li>
+                    <li 
+                        className={`${styles.menuItem} ${activeTab === "reviews" ? styles.menuItemActive : ""}`}
+                        onClick={() => setActiveTab("reviews")}
+                    >
+                        ⭐ Отзывы
                     </li>
                 </ul>
             </aside>
@@ -30,8 +44,9 @@ export default function AdminPanel() {
             {/* Контентная зона */}
             <main className={styles.contentArea}>
                 {activeTab === "categories" && <CategoriesCRUD />}
-                {/* 2. Заменяем текстовую заглушку на сам компонент */}
                 {activeTab === "products" && <ProductsCRUD />} 
+                {activeTab === "reservations" && <ReservationsCRUD />} 
+                {activeTab === "reviews" && <ReviewsCRUD />} 
             </main>
         </div>
     );

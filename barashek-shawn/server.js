@@ -309,5 +309,107 @@ app.delete("/api/admin/products/:id", (req, res) => {
     });
 });
 
+// ==========================================
+// УПРАВЛЕНИЕ БРОНИРОВАНИЕМ (АДМИНКА)
+// ==========================================
+
+// 1. Получить все бронирования с информацией о клиенте и столике
+app.get("/api/admin/reservations", (req, res) => {
+    const sqlQuery = `
+        SELECT r.*, u.first_name, u.phone, u.email, t.table_number, t.capacity 
+        FROM reservations r
+        JOIN users u ON r.user_id = u.id
+        LEFT JOIN tables t ON r.table_id = t.id
+        ORDER BY r.reservation_date DESC, r.reservation_time DESC
+    `;
+    db.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error("ОШИБКА READ RESERVATIONS:", err);
+            return res.status(500).json({ error: "Ошибка при получении списка бронирований" });
+        }
+        res.json(results);
+    });
+});
+
+// 2. Получить список всех столов ресторана (для назначения в форме брони)
+app.get("/api/admin/tables", (req, res) => {
+    const sqlQuery = "SELECT * FROM tables ORDER BY table_number ASC";
+    db.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error("ОШИБКА READ TABLES:", err);
+            return res.status(500).json({ error: "Ошибка при получении списка столов" });
+        }
+        res.json(results);
+    });
+});
+
+// 3. Обновить статус брони или назначить столик (PUT)
+app.put("/api/admin/reservations/:id", (req, res) => {
+    const reservationId = req.params.id;
+    const { status, table_id } = req.body;
+
+    if (!status) {
+        return res.status(400).json({ error: "Статус бронирования обязателен" });
+    }
+
+    const sqlQuery = "UPDATE reservations SET status = ?, table_id = ? WHERE id = ?";
+    const values = [String(status), table_id && !isNaN(table_id) ? parseInt(table_id) : null, reservationId];
+
+    db.query(sqlQuery, values, (err, result) => {
+        if (err) {
+            console.error("ОШИБКА UPDATE RESERVATION:", err);
+            return res.status(400).json({ error: "MySQL отказался обновить бронирование", details: err.message });
+        }
+        res.json({ message: "Бронирование успешно обновлено" });
+    });
+});
+
+app.delete("/api/admin/reservations/:id", (req, res) => {
+    db.query("DELETE FROM reservations WHERE id = ?", [req.params.id], (err) => {
+        if (err) return res.status(500).json({ error: "Ошибка удаления брони" });
+        res.json({ message: "Бронирование удалено" });
+    });
+});
+
+// ==========================================
+// УПРАВЛЕНИЕ ОТЗЫВАМИ (АДМИНКА)
+// ==========================================
+
+// 1. Получить все отзывы с привязкой к автору и товару
+app.get("/api/admin/reviews", (req, res) => {
+    const sqlQuery = `
+        SELECT r.*, u.first_name, u.email, p.name AS product_name 
+        FROM reviews r
+        JOIN users u ON r.user_id = u.id
+        JOIN products p ON r.product_id = p.id
+        ORDER BY r.created_at DESC
+    `;
+    db.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error("ОШИБКА READ REVIEWS:", err);
+            return res.status(500).json({ error: "Ошибка при получении списка отзывов" });
+        }
+        res.json(results);
+    });
+});
+
+// 2. Удалить отзыв по ID (модерация)
+app.delete("/api/admin/reviews/:id", (req, res) => {
+    const reviewId = req.params.id;
+    const sqlQuery = "DELETE FROM reviews WHERE id = ?";
+
+    db.query(sqlQuery, [reviewId], (err, result) => {
+        if (err) {
+            console.error("ОШИБКА DELETE REVIEW:", err);
+            return res.status(500).json({ error: "Не удалось удалить отзыв из базы данных" });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Отзыв с таким ID не найден" });
+        }
+        res.json({ message: "Отзыв успешно удален" });
+    });
+});
+
+
 const PORT = process.env.SERVER_PORT || 5000; 
 app.listen(PORT, () => console.log(`Бэкенд запущен на порту ${PORT}`));
