@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header/Header";
-import styles from "./Cart.module.css";
+import styles from "./styles/Cart.module.css";
 
 import hinkali from "../assets/images/hinkali.png";
 import shashlik from "../assets/images/shashlik.png";

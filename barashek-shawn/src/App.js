@@ -9,6 +9,7 @@ import DishPage from './pages/DishPage';
 import Login from './pages/Login';
 import PaymentMethod from './pages/PaymentMethod';
 import Cart from './pages/Cart';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/Login" element={<Login/>}/>
           <Route path="/PaymentMethod" element={<PaymentMethod/>}/>
           <Route path="/Cart" element={<Cart/>}/>
+          <Route path="/Register" element={<RegisterPage/>}/>
         </Routes>
       </div>
     </div>
