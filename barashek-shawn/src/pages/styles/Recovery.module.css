@@ -80,6 +80,8 @@
     justify-content: center;
     align-items: center;
 
+    gap: 20px;
+
 }
 
 .Inputs>p {
@@ -92,6 +94,8 @@
 
     font-size: 14px;
     color: #747474;
+
+    margin-top: -10px;
 }
 
 .Inputs>input {
@@ -102,8 +106,6 @@
 
     text-align: center;
     color: #222222;
-
-    margin-bottom: -10px;
 }
 
 .Inputs>input:focus{

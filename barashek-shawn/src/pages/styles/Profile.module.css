@@ -1,0 +1,91 @@
+.ProfilePage {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 95px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: 1280px;
+    height: 326px;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 100px;
+}
+
+/* Заголовок 1 (Ваш Профиль) */
+.h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 100px;
+}
+
+/* Заголовок 2 (Изменить информацию) */
+.h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Блок "Изменить информацию" */
+.form {
+    width: 511px;
+    height: 326px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Контейнер строки (текст + инпут) */
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Названия полей ввода */
+.label {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* Поля ввода */
+.input {
+    width: 310px;
+    height: 38px;
+    background-color: #CDCDCD;
+    border: none;
+    border-radius: 12px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Цвет плейсхолдера */
+.input::placeholder {
+    color: #747474;
+    opacity: 1;
+}
+
+/* Кнопка "Сохранить изменения" */
+.button {
+    width: 511px;
+    height: 38px;
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}

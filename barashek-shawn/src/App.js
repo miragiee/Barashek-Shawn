@@ -10,8 +10,10 @@ import Login from './pages/Login';
 import PaymentMethod from './pages/PaymentMethod';
 import Cart from './pages/Cart';
 import RegisterPage from './pages/RegisterPage';
-import RecoveryStage1 from './pages/PasswordRecoveryStage1';
 import PasswordRecoveryStage1 from './pages/PasswordRecoveryStage1';
+import PasswordRecoveryStage2 from './pages/PasswordRecoveryStage2';
+import Profile from './pages/Profile';
+import PaymentSuccess from './pages/PaymentSuccess'
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
           <Route path="/Cart" element={<Cart/>}/>
           <Route path="/Register" element={<RegisterPage/>}/>
           <Route path="/PasswordRecoveryStage1" element={<PasswordRecoveryStage1/>}/>
+          <Route path="/PasswordRecoveryStage2" element={<PasswordRecoveryStage2/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
+          <Route path="/PaymentSuccess" element={<PaymentSuccess/>}/>
         </Routes>
       </div>
     </div>

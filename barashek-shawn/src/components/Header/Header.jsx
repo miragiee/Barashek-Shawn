@@ -12,11 +12,9 @@ export default function Header(){
             <Link to="/"><img src={logo} alt="Logo" className={styles.logo}/></Link>
             <nav>
                 <ul>
-                    
                     <li><Link to="/">Главная</Link></li>
-                    <li><a href="">Забронировать</a></li>
+                    <li><Link href="">Забронировать</Link></li>
                     <li><Link to="/Catalog">Каталог</Link></li>
-                    <li><a href="">Дегустации</a></li>
                     <li><Link to="/Cart"><img src={shcart} alt="Корзина" /></Link></li>
                     <li><Link to="/Login"><img src={pfp} alt="Профиль" /></Link></li>
                 </ul>
