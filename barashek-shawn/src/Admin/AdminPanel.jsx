@@ -3,6 +3,7 @@ import CategoriesCRUD from "./pages/CategoriesCRUD";
 import ProductsCRUD from "./pages/ProductCRUD";
 import ReservationsCRUD from "./pages/ReservationCRUD";
 import ReviewsCRUD from "./pages/ReviewCRUD";
+import UserCRUD from "./pages/UserCRUD"; // Импортируем новый CRUD
 import styles from "./AdminStyles.module.css";
 
 export default function AdminPanel() {
@@ -27,6 +28,12 @@ export default function AdminPanel() {
                         📁 Категории
                     </li>
                     <li 
+                        className={`${styles.menuItem} ${activeTab === "users" ? styles.menuItemActive : ""}`}
+                        onClick={() => setActiveTab("users")}
+                    >
+                        👥 Пользователи
+                    </li>
+                    <li 
                         className={`${styles.menuItem} ${activeTab === "reservations" ? styles.menuItemActive : ""}`}
                         onClick={() => setActiveTab("reservations")}
                     >
@@ -45,9 +52,11 @@ export default function AdminPanel() {
             <main className={styles.contentArea}>
                 {activeTab === "categories" && <CategoriesCRUD />}
                 {activeTab === "products" && <ProductsCRUD />} 
+                {activeTab === "users" && <UserCRUD />} {/* Отрисовка пользователей */}
                 {activeTab === "reservations" && <ReservationsCRUD />} 
                 {activeTab === "reviews" && <ReviewsCRUD />} 
             </main>
         </div>
     );
 }
+

@@ -410,6 +410,111 @@ app.delete("/api/admin/reviews/:id", (req, res) => {
     });
 });
 
+// ==========================================
+// 5. УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ (АДМИНКА)
+// ==========================================
+
+// 1. Получить список всех пользователей для админки
+app.get("/api/admin/users", (req, res) => {
+    const sqlQuery = "SELECT id, first_name, phone, email, created_at FROM users ORDER BY id DESC";
+    db.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error("ОШИБКА READ ALL USERS:", err);
+            return res.status(500).json({ error: "Ошибка при получении списка пользователей" });
+        }
+        res.json(results);
+    });
+});
+
+// 2. Добавить нового пользователя через админку (с хешированием пароля)
+app.post("/api/admin/users", async (req, res) => {
+    const { first_name, phone, email, password } = req.body;
+
+    if (!first_name || !phone || !email || !password) {
+        return res.status(400).json({ error: "Все поля (имя, телефон, email и пароль) обязательны для заполнения" });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const sqlQuery = "INSERT INTO users (first_name, phone, email, password_hash) VALUES (?, ?, ?, ?)";
+
+        db.query(sqlQuery, [first_name, phone, email, hashedPassword], (err, result) => {
+            if (err) {
+                console.error("ОШИБКА АДМИН-СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ:", err);
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ error: "Пользователь с таким Email уже существует" });
+                }
+                return res.status(500).json({ error: "Не удалось создать пользователя в БД" });
+            }
+            res.status(201).json({ message: "Пользователь успешно создан", id: result.insertId });
+        });
+    } catch (e) {
+        res.status(500).json({ error: "Внутренняя ошибка сервера при шифровании пароля" });
+    }
+});
+
+// 3. Редактировать пользователя (с опциональным изменением пароля)
+app.put("/api/admin/users/:id", async (req, res) => {
+    const userId = req.params.id;
+    const { first_name, phone, email, password } = req.body;
+
+    if (!first_name || !phone || !email) {
+        return res.status(400).json({ error: "Поля имя, телефон и email обязательны" });
+    }
+
+    try {
+        let sqlQuery;
+        let values;
+
+        // Если админ ввел новый пароль, хешируем его и обновляем, иначе оставляем старый
+        if (password && password.trim() !== "") {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ?, password_hash = ? WHERE id = ?";
+            values = [String(first_name), String(phone), String(email), hashedPassword, userId];
+        } else {
+            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ? WHERE id = ?";
+            values = [String(first_name), String(phone), String(email), userId];
+        }
+
+        db.query(sqlQuery, values, (err, result) => {
+            if (err) {
+                console.error("ОШИБКА UPDATE USER:", err);
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ error: "Этот Email уже занят другим пользователем" });
+                }
+                return res.status(500).json({ error: "Ошибка базы данных при обновлении профиля" });
+            }
+            res.json({ message: "Данные пользователя успешно обновлены" });
+        });
+    } catch (e) {
+        res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    }
+});
+
+// 4. Удалить пользователя из системы
+app.delete("/api/admin/users/:id", (req, res) => {
+    const userId = req.params.id;
+    const sqlQuery = "DELETE FROM users WHERE id = ?";
+
+    db.query(sqlQuery, [userId], (err, result) => {
+        if (err) {
+            console.error("ОШИБКА DELETE USER:", err);
+            // Обработка внешних ключей (если у юзера есть связанные заказы, отзывы или бронирования)
+            if (err.code === "ER_ROW_IS_REFERENCED_2") {
+                return res.status(400).json({ 
+                    error: "Нельзя удалить пользователя, так как к нему привязаны активные заказы, отзывы или бронирования столов." 
+                });
+            }
+            return res.status(500).json({ error: "Ошибка при удалении пользователя из базы данных" });
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Пользователь с таким ID не найден" });
+        }
+
+        res.json({ message: "Пользователь успешно удален" });
+    });
+});
 
 const PORT = process.env.SERVER_PORT || 5000; 
 app.listen(PORT, () => console.log(`Бэкенд запущен на порту ${PORT}`));

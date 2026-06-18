@@ -221,3 +221,64 @@
     color: #ffc107;
     border: 1px solid #3a3a3a;
 }
+
+/* Дополнительная сетка для полей формы */
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.formButtonsGroup {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Второстепенная серая кнопка (Отмена) */
+.btnSecondary {
+    background-color: #262626;
+    color: #ffffff;
+    border: 1px solid #3a3a3a;
+}
+
+.btnSecondary:hover {
+    background-color: #333333;
+}
+
+/* Стилизация круглых кнопок действий в таблице */
+.btnAction {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, background-color 0.2s;
+    margin: 0 4px;
+}
+
+.btnAction:active {
+    transform: scale(0.9);
+}
+
+.btnActionEdit {
+    background-color: #ffc107;
+    color: #121212;
+}
+
+.btnActionEdit:hover {
+    background-color: #e0a800;
+}
+
+.btnActionDelete {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.btnActionDelete:hover {
+    background-color: #bd2130;
+}
