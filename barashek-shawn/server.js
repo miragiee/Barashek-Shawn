@@ -220,9 +220,11 @@ app.delete("/api/admin/categories/:id", (req, res) => {
 });
 
 
-// --- ТОВАРЫ ---
+// ==========================================
+// УПРАВЛЕНИЕ ТОВАРОВ (БЕЗОПАСНЫЙ ИСПРАВЛЕННЫЙ БЛОК)
+// ==========================================
 
-// Получить все товары для админки
+// 1. Получить все товары для админки
 app.get("/api/admin/products", (req, res) => {
     const sqlQuery = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC";
     db.query(sqlQuery, (err, results) => {
@@ -234,7 +236,7 @@ app.get("/api/admin/products", (req, res) => {
     });
 });
 
-// Добавить новый товар (Финальная исправленная версия)
+// 2. Добавить новый товар (POST)
 app.post("/api/admin/products", (req, res) => {
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
 
@@ -250,24 +252,19 @@ app.post("/api/admin/products", (req, res) => {
     const finalAvailable = is_available === 1 || is_available === "1" ? 1 : 0;
     const finalImageUrl = images_url ? String(images_url) : "";
 
-    // ИСПРАВЛЕНО: Заменили имя колонки images_url на image_url в SQL-запросе
     const sqlQuery = "INSERT INTO products (category_id, name, description, weight_g, price, is_available, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const values = [finalCategoryId, finalName, finalDescription, finalWeight, finalPrice, finalAvailable, finalImageUrl];
 
     db.query(sqlQuery, values, (err, result) => {
         if (err) {
-            console.error("КРИТИЧЕСКАЯ ОШИБКА MYSQL:", err);
-            return res.status(400).json({ 
-                error: "MySQL отказался сохранить товар", 
-                details: err.message, 
-                code: err.code 
-            });
+            console.error("КРИТИЧЕСКАЯ ОШИБКА MYSQL ПРИ СОЗДАНИИ:", err);
+            return res.status(400).json({ error: "MySQL отказался сохранить товар", details: err.message });
         }
         res.status(201).json({ message: "Товар успешно добавлен", id: result.insertId });
     });
 });
 
-// Изменить товар
+// 3. Редактировать товар (PUT)
 app.put("/api/admin/products/:id", (req, res) => {
     const productId = req.params.id;
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
@@ -276,30 +273,35 @@ app.put("/api/admin/products/:id", (req, res) => {
         return res.status(400).json({ error: "Поля category_id, name и price обязательны" });
     }
 
-    const sqlQuery = "UPDATE products SET category_id = ?, name = ?, description = ?, weight_g = ?, price = ?, is_available = ?, images_url = ? WHERE id = ?";
-    const values = [category_id, name, description, weight_g, price, is_available, images_url, productId];
+    const finalCategoryId = parseInt(category_id);
+    const finalName = String(name);
+    const finalDescription = description ? String(description) : "";
+    const finalWeight = weight_g && !isNaN(weight_g) ? parseInt(weight_g) : 0;
+    const finalPrice = parseFloat(price);
+    const finalAvailable = is_available === 1 || is_available === "1" ? 1 : 0;
+    const finalImageUrl = images_url ? String(images_url) : "";
+
+    const sqlQuery = "UPDATE products SET category_id = ?, name = ?, description = ?, weight_g = ?, price = ?, is_available = ?, image_url = ? WHERE id = ?";
+    const values = [finalCategoryId, finalName, finalDescription, finalWeight, finalPrice, finalAvailable, finalImageUrl, productId];
 
     db.query(sqlQuery, values, (err, result) => {
         if (err) {
-            console.error("ОШИБКА UPDATE PRODUCT:", err);
-            return res.status(500).json({ error: "Ошибка при обновлении товара" });
+            console.error("КРИТИЧЕСКАЯ ОШИБКА MYSQL ПРИ ОБНОВЛЕНИИ:", err);
+            return res.status(400).json({ error: "MySQL отказался обновить товар", details: err.message });
         }
         res.json({ message: "Товар успешно обновлен" });
     });
 });
 
-// Удалить товар
+// 4. Удалить товар (DELETE)
 app.delete("/api/admin/products/:id", (req, res) => {
     const productId = req.params.id;
     const sqlQuery = "DELETE FROM products WHERE id = ?";
-    
     db.query(sqlQuery, [productId], (err, result) => {
         if (err) {
             console.error("ОШИБКА DELETE PRODUCT:", err);
             if (err.code === "ER_ROW_IS_REFERENCED_2") {
-                return res.status(400).json({ 
-                    error: "Нельзя удалить товар, так как он есть в созданных заказах. Вместо удаления скройте его (is_available = 0)." 
-                });
+                return res.status(400).json({ error: "Нельзя удалить блюдо, так как оно есть в заказах. Скройте его статус." });
             }
             return res.status(500).json({ error: "Ошибка при удалении товара" });
         }

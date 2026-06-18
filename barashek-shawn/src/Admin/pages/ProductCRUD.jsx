@@ -222,7 +222,6 @@ export default function ProductsCRUD() {
                         <table className={styles.crudTable}>
                             <thead>
                                 <tr>
-                                    <th>Фото</th>
                                     <th>ID</th>
                                     <th>Название</th>
                                     <th>Категория</th>
@@ -235,14 +234,6 @@ export default function ProductsCRUD() {
                             <tbody>
                                 {currentItems.map((product) => (
                                     <tr key={product.id}>
-                                        <td>
-                                            <img 
-                                                src={`http://localhost:3000/${product.images_url || product.image_url}`} 
-                                                alt="" 
-                                                style={{ width: "55px", height: "40px", objectFit: "cover", borderRadius: "6px" }}
-                                                onError={(e) => { e.target.src = "https://placehold.co"; }}
-                                            />
-                                        </td>
                                         <td>{product.id}</td>
                                         <td><strong>{product.name}</strong></td>
                                         <td>{product.category_name}</td>
