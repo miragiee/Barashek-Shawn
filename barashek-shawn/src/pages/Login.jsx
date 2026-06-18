@@ -18,7 +18,7 @@ export default function Login () {
 
                 <div className={styles.UsefullLinks}>
                     <Link to={"/Register"} className={styles.NormalLink}>Зарегистрироваться</Link>
-                    <Link className={styles.AccentLink}>Забыл пароль</Link>
+                    <Link to={"/PasswordRecoveryStage1"} className={styles.AccentLink}>Забыл пароль</Link>
                 </div>
             </main>
             <Footer/>

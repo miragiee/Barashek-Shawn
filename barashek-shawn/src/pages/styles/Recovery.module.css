@@ -1,0 +1,148 @@
+.RecoveryPage {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+}
+.Container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 1280px;
+    height: 623px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    gap: 20px;
+
+}
+.PageTitle {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.RecoveryMethod {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 50px;
+
+    width: 170PX;
+    height: 60px;
+}
+
+.RecoveryMethod>button {
+    display: flex;
+
+    width: 60px;
+    height: 60px;
+
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 30px;
+}
+
+.RecoveryMethod>button:hover{
+    cursor: pointer;
+}
+
+.RecoveryMethod>button>img {
+    width: 32px;
+    height: auto;
+
+    margin: auto;
+}
+
+.ActiveButton {
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+}
+
+.NonActiveButton {
+    background: linear-gradient(90deg, #252525 0%, #222222 60%);
+}
+
+.Inputs {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Inputs>p {
+    text-align: center;
+
+    width: 309px;
+    height: 34px;
+
+    margin-bottom: 40px;
+
+    font-size: 14px;
+    color: #747474;
+}
+
+.Inputs>input {
+    width: 310px;
+    height: 48px;
+
+    border: none;
+
+    text-align: center;
+    color: #222222;
+
+    margin-bottom: -10px;
+}
+
+.Inputs>input:focus{
+    outline: none;
+}
+
+.Inputs>input::placeholder{
+    font-size: 14px;
+    font-weight: lighter;
+
+
+    color: #222222;
+}
+
+.InputBar{
+    border-radius: 30px;
+    
+    background-color: #CDCDCD;
+}
+
+.SubmitButton {
+    font-size: 14px;
+    font-weight: lighter;
+
+    background: linear-gradient(90deg, #F8BF2F 0%, #FFD059 100%);
+
+    border-radius: 15px;
+}
+
+.SubmitButton:hover {
+    background: linear-gradient(90deg, #FFCD4E 0%, #FFE092 100%);
+
+    cursor: pointer;
+}
+
+.AuthLink {
+    text-decoration: none;
+
+    font-size: 14px;
+
+    color: #F8BF2F;
+}

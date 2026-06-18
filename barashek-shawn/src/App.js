@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import PaymentMethod from './pages/PaymentMethod';
 import Cart from './pages/Cart';
 import RegisterPage from './pages/RegisterPage';
+import RecoveryStage1 from './pages/PasswordRecoveryStage1';
+import PasswordRecoveryStage1 from './pages/PasswordRecoveryStage1';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
           <Route path="/PaymentMethod" element={<PaymentMethod/>}/>
           <Route path="/Cart" element={<Cart/>}/>
           <Route path="/Register" element={<RegisterPage/>}/>
+          <Route path="/PasswordRecoveryStage1" element={<PasswordRecoveryStage1/>}/>
         </Routes>
       </div>
     </div>
