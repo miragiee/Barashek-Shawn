@@ -123,9 +123,15 @@ app.post("/api/orders", authenticateToken, (req, res) => {
         }
         
         const orderId = orderResult.insertId;
-
         const orderItemsQuery = "INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ?";
-        const values = items.map(item => [orderId, item.product_id, item.quantity, item.price_at_purchase]);
+        
+        // Исправлено: Стойкая защита от различий полей на фронтенде (поддержка id/product_id и price/price_at_purchase)
+        const values = items.map(item => [
+            orderId, 
+            item.product_id || item.id, 
+            item.quantity, 
+            item.price || item.price_at_purchase
+        ]);
 
         db.query(orderItemsQuery, [values], (err) => {
             if (err) {
@@ -138,13 +144,13 @@ app.post("/api/orders", authenticateToken, (req, res) => {
 });
 
 // ==========================================
-// 4. CRUD ДЛЯ АДМИН-ПАНЕЛИ (ДОБАВЛЕННЫЙ БЛОК)
+// 4. CRUD ДЛЯ АДМИН-ПАНЕЛИ (С ЗАЩИТОЙ ПО ТОКЕНУ)
 // ==========================================
 
 // --- КАТЕГОРИИ ---
 
 // Получить все категории
-app.get("/api/admin/categories", (req, res) => {
+app.get("/api/admin/categories", authenticateToken, (req, res) => {
     const sqlQuery = "SELECT * FROM categories ORDER BY name ASC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -156,7 +162,7 @@ app.get("/api/admin/categories", (req, res) => {
 });
 
 // Создать категорию
-app.post("/api/admin/categories", (req, res) => {
+app.post("/api/admin/categories", authenticateToken, (req, res) => {
     const { name, slug } = req.body;
     if (!name || !slug) return res.status(400).json({ error: "Заполните поля name и slug" });
 
@@ -170,8 +176,8 @@ app.post("/api/admin/categories", (req, res) => {
     });
 });
 
-// [UPDATE] Изменить существующую категорию по ID
-app.put("/api/admin/categories/:id", (req, res) => {
+// Изменить существующую категорию по ID
+app.put("/api/admin/categories/:id", authenticateToken, (req, res) => {
     const categoryId = req.params.id;
     const { name, slug } = req.body;
 
@@ -194,15 +200,14 @@ app.put("/api/admin/categories/:id", (req, res) => {
     });
 });
 
-// [DELETE] Удалить категорию по ID
-app.delete("/api/admin/categories/:id", (req, res) => {
+// Удалить категорию по ID
+app.delete("/api/admin/categories/:id", authenticateToken, (req, res) => {
     const categoryId = req.params.id;
-
     const sqlQuery = "DELETE FROM categories WHERE id = ?";
+    
     db.query(sqlQuery, [categoryId], (err, result) => {
         if (err) {
             console.error("ОШИБКА DELETE CATEGORY:", err);
-            // Защита: если в категории есть товары, MySQL не даст её удалить из-за ограничений ключа
             if (err.code === "ER_ROW_IS_REFERENCED_2") {
                 return res.status(400).json({ 
                     error: "Нельзя удалить категорию, так как к ней привязаны товары. Сначала удалите товары или перенесите их в другую категорию." 
@@ -220,12 +225,10 @@ app.delete("/api/admin/categories/:id", (req, res) => {
 });
 
 
-// ==========================================
-// УПРАВЛЕНИЕ ТОВАРОВ (БЕЗОПАСНЫЙ ИСПРАВЛЕННЫЙ БЛОК)
-// ==========================================
+// --- ТОВАРЫ ---
 
 // 1. Получить все товары для админки
-app.get("/api/admin/products", (req, res) => {
+app.get("/api/admin/products", authenticateToken, (req, res) => {
     const sqlQuery = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -236,8 +239,8 @@ app.get("/api/admin/products", (req, res) => {
     });
 });
 
-// 2. Добавить новый товар (POST)
-app.post("/api/admin/products", (req, res) => {
+// 2. Добавить новый товар
+app.post("/api/admin/products", authenticateToken, (req, res) => {
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
 
     if (!category_id || !name || !price) {
@@ -264,8 +267,8 @@ app.post("/api/admin/products", (req, res) => {
     });
 });
 
-// 3. Редактировать товар (PUT)
-app.put("/api/admin/products/:id", (req, res) => {
+// 3. Редактировать товар
+app.put("/api/admin/products/:id", authenticateToken, (req, res) => {
     const productId = req.params.id;
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
 
@@ -293,8 +296,8 @@ app.put("/api/admin/products/:id", (req, res) => {
     });
 });
 
-// 4. Удалить товар (DELETE)
-app.delete("/api/admin/products/:id", (req, res) => {
+// 4. Удалить товар
+app.delete("/api/admin/products/:id", authenticateToken, (req, res) => {
     const productId = req.params.id;
     const sqlQuery = "DELETE FROM products WHERE id = ?";
     db.query(sqlQuery, [productId], (err, result) => {
@@ -309,12 +312,11 @@ app.delete("/api/admin/products/:id", (req, res) => {
     });
 });
 
-// ==========================================
-// УПРАВЛЕНИЕ БРОНИРОВАНИЕМ (АДМИНКА)
-// ==========================================
 
-// 1. Получить все бронирования с информацией о клиенте и столике
-app.get("/api/admin/reservations", (req, res) => {
+// --- БРОНИРОВАНИЕ ---
+
+// 1. Получить все бронирования
+app.get("/api/admin/reservations", authenticateToken, (req, res) => {
     const sqlQuery = `
         SELECT r.*, u.first_name, u.phone, u.email, t.table_number, t.capacity 
         FROM reservations r
@@ -331,8 +333,8 @@ app.get("/api/admin/reservations", (req, res) => {
     });
 });
 
-// 2. Получить список всех столов ресторана (для назначения в форме брони)
-app.get("/api/admin/tables", (req, res) => {
+// 2. Получить список всех столов ресторана
+app.get("/api/admin/tables", authenticateToken, (req, res) => {
     const sqlQuery = "SELECT * FROM tables ORDER BY table_number ASC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -343,8 +345,8 @@ app.get("/api/admin/tables", (req, res) => {
     });
 });
 
-// 3. Обновить статус брони или назначить столик (PUT)
-app.put("/api/admin/reservations/:id", (req, res) => {
+// 3. Обновить статус брони или назначить столик
+app.put("/api/admin/reservations/:id", authenticateToken, (req, res) => {
     const reservationId = req.params.id;
     const { status, table_id } = req.body;
 
@@ -364,19 +366,19 @@ app.put("/api/admin/reservations/:id", (req, res) => {
     });
 });
 
-app.delete("/api/admin/reservations/:id", (req, res) => {
+// 4. Удалить бронирование
+app.delete("/api/admin/reservations/:id", authenticateToken, (req, res) => {
     db.query("DELETE FROM reservations WHERE id = ?", [req.params.id], (err) => {
         if (err) return res.status(500).json({ error: "Ошибка удаления брони" });
         res.json({ message: "Бронирование удалено" });
     });
 });
 
-// ==========================================
-// УПРАВЛЕНИЕ ОТЗЫВАМИ (АДМИНКА)
-// ==========================================
 
-// 1. Получить все отзывы с привязкой к автору и товару
-app.get("/api/admin/reviews", (req, res) => {
+// --- ОТЗЫВЫ ---
+
+// 1. Получить все отзывы
+app.get("/api/admin/reviews", authenticateToken, (req, res) => {
     const sqlQuery = `
         SELECT r.*, u.first_name, u.email, p.name AS product_name 
         FROM reviews r
@@ -393,8 +395,8 @@ app.get("/api/admin/reviews", (req, res) => {
     });
 });
 
-// 2. Удалить отзыв по ID (модерация)
-app.delete("/api/admin/reviews/:id", (req, res) => {
+// 2. Удалить отзыв по ID
+app.delete("/api/admin/reviews/:id", authenticateToken, (req, res) => {
     const reviewId = req.params.id;
     const sqlQuery = "DELETE FROM reviews WHERE id = ?";
 
@@ -410,12 +412,11 @@ app.delete("/api/admin/reviews/:id", (req, res) => {
     });
 });
 
-// ==========================================
-// 5. УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ (АДМИНКА)
-// ==========================================
 
-// 1. Получить список всех пользователей для админки
-app.get("/api/admin/users", (req, res) => {
+// --- ПОЛЬЗОВАТЕЛИ ---
+
+// 1. Получить список всех пользователей
+app.get("/api/admin/users", authenticateToken, (req, res) => {
     const sqlQuery = "SELECT id, first_name, phone, email, created_at FROM users ORDER BY id DESC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -426,8 +427,8 @@ app.get("/api/admin/users", (req, res) => {
     });
 });
 
-// 2. Добавить нового пользователя через админку (с хешированием пароля)
-app.post("/api/admin/users", async (req, res) => {
+// 2. Добавить нового пользователя
+app.post("/api/admin/users", authenticateToken, async (req, res) => {
     const { first_name, phone, email, password } = req.body;
 
     if (!first_name || !phone || !email || !password) {
@@ -453,8 +454,8 @@ app.post("/api/admin/users", async (req, res) => {
     }
 });
 
-// 3. Редактировать пользователя (с опциональным изменением пароля)
-app.put("/api/admin/users/:id", async (req, res) => {
+// 3. Редактировать пользователя
+app.put("/api/admin/users/:id", authenticateToken, async (req, res) => {
     const userId = req.params.id;
     const { first_name, phone, email, password } = req.body;
 
@@ -466,7 +467,6 @@ app.put("/api/admin/users/:id", async (req, res) => {
         let sqlQuery;
         let values;
 
-        // Если админ ввел новый пароль, хешируем его и обновляем, иначе оставляем старый
         if (password && password.trim() !== "") {
             const hashedPassword = await bcrypt.hash(password, 10);
             sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ?, password_hash = ? WHERE id = ?";
@@ -491,15 +491,14 @@ app.put("/api/admin/users/:id", async (req, res) => {
     }
 });
 
-// 4. Удалить пользователя из системы
-app.delete("/api/admin/users/:id", (req, res) => {
+// 4. Удалить пользователя
+app.delete("/api/admin/users/:id", authenticateToken, (req, res) => {
     const userId = req.params.id;
     const sqlQuery = "DELETE FROM users WHERE id = ?";
 
     db.query(sqlQuery, [userId], (err, result) => {
         if (err) {
             console.error("ОШИБКА DELETE USER:", err);
-            // Обработка внешних ключей (если у юзера есть связанные заказы, отзывы или бронирования)
             if (err.code === "ER_ROW_IS_REFERENCED_2") {
                 return res.status(400).json({ 
                     error: "Нельзя удалить пользователя, так как к нему привязаны активные заказы, отзывы или бронирования столов." 
@@ -516,5 +515,5 @@ app.delete("/api/admin/users/:id", (req, res) => {
     });
 });
 
-const PORT = process.env.SERVER_PORT || 5000; 
+const PORT = process.env.SERVER_PORT || 5000;
 app.listen(PORT, () => console.log(`Бэкенд запущен на порту ${PORT}`));
