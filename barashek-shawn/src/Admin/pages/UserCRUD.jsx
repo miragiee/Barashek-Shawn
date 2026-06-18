@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../AdminStyles.module.css";
 
 export default function UserCRUD() {
+    // Состояния для данных
     const [users, setUsers] = useState([]);
     const [formData, setFormData] = useState({
         first_name: "",
@@ -9,10 +10,19 @@ export default function UserCRUD() {
         email: "",
         password: ""
     });
+    
+    // Состояния для управления UI/процессами
     const [editingId, setEditingId] = useState(null);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
+    // Состояния для фильтрации, сортировки и пагинации
+    const [searchTerm, setSearchTerm] = useState("");
+    const [sortOrder, setSortOrder] = useState("asc"); // "asc" — старые сверху (ID ▲), "desc" — новые сверху (ID ▼)
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5; // Количество пользователей на одной странице
+
+    // Загрузка списка пользователей с бэкенда
     const fetchUsers = async () => {
         try {
             const response = await fetch("http://localhost:5000/api/admin/users");
@@ -28,10 +38,12 @@ export default function UserCRUD() {
         fetchUsers();
     }, []);
 
+    // Обработчик изменения полей ввода формы
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Отправка формы (Создание или Редактирование)
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -62,16 +74,20 @@ export default function UserCRUD() {
         }
     };
 
+    // Клик по кнопке "Редактировать" (заполнение формы данными)
     const handleEdit = (user) => {
         setEditingId(user.id);
         setFormData({
             first_name: user.first_name || "",
             phone: user.phone || "",
             email: user.email || "",
-            password: ""
+            password: "" // оставляем пустым, если админ не хочет менять пароль
         });
+        // Скролл к форме для удобства
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     };
 
+    // Удаление пользователя с подтверждением
     const handleDelete = async (id) => {
         if (!window.confirm("Вы действительно хотите удалить этого пользователя?")) return;
         setError("");
@@ -92,6 +108,36 @@ export default function UserCRUD() {
         }
     };
 
+    // ==========================================
+    // ЛОГИКА ФИЛЬТРАЦИИ, СОРТИРОВКИ И ПАГИНАЦИИ
+    // ==========================================
+
+    // 1. Фильтрация по поисковому запросу
+    const filteredUsers = users.filter((user) => {
+        const firstNameText = user.first_name ? String(user.first_name).toLowerCase() : "";
+        const phoneText = user.phone ? String(user.phone).toLowerCase() : "";
+        const emailText = user.email ? String(user.email).toLowerCase() : "";
+        const search = searchTerm.toLowerCase();
+
+        return firstNameText.includes(search) || 
+               phoneText.includes(search) || 
+               emailText.includes(search);
+    });
+
+    // 2. Сортировка по ID
+    const sortedUsers = [...filteredUsers].sort((a, b) => {
+        if (sortOrder === "desc") {
+            return b.id - a.id; // Новые сверху
+        }
+        return a.id - b.id; // Старые сверху
+    });
+
+    // 3. Вычисление среза данных для текущей страницы пагинации
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = sortedUsers.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(sortedUsers.length / itemsPerPage);
+
     return (
         <div>
             <h2 className={styles.panelTitle}>Управление пользователями</h2>
@@ -99,9 +145,35 @@ export default function UserCRUD() {
             {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
             {success && <div className={`${styles.alert} ${styles.alertSuccess}`}>{success}</div>}
 
-            {/* Таблица пользователей */}
+            {/* Карточка со списком пользователей и фильтрами */}
             <div className={styles.card}>
                 <h3 className={styles.sectionTitle}>Актуальный список пользователей</h3>
+                
+                {/* Панель фильтров (Поиск + Сортировка) */}
+                <div style={{ display: "flex", gap: "16px", marginBottom: "20px" }}>
+                    <div style={{ flex: 1 }}>
+                        <input
+                            type="text"
+                            placeholder="Поиск по имени, телефону или email..."
+                            value={searchTerm}
+                            onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                            className={styles.inputField}
+                        />
+                    </div>
+                    <div style={{ width: "240px" }}>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className={styles.inputField}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <option value="asc">Старые сверху (ID ▲)</option>
+                            <option value="desc">Новые сверху (ID ▼)</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Таблица */}
                 <div className={styles.tableContainer}>
                     <table className={styles.crudTable}>
                         <thead>
@@ -115,12 +187,12 @@ export default function UserCRUD() {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.length === 0 ? (
+                            {currentItems.length === 0 ? (
                                 <tr>
-                                    <td colSpan="6" className={styles.emptyRow}>Пользователи отсутствуют</td>
+                                    <td colSpan="6" className={styles.emptyRow}>Пользователи не найдены</td>
                                 </tr>
                             ) : (
-                                users.map((user) => (
+                                currentItems.map((user) => (
                                     <tr key={user.id}>
                                         <td><span className={styles.codeBadge}>{user.id}</span></td>
                                         <td style={{ fontWeight: 600, color: "#ffffff" }}>{user.first_name}</td>
@@ -128,8 +200,20 @@ export default function UserCRUD() {
                                         <td>{user.email}</td>
                                         <td>{user.created_at ? new Date(user.created_at).toLocaleString() : "-"}</td>
                                         <td style={{ textAlign: "center" }}>
-                                            <button onClick={() => handleEdit(user)} className={`${styles.btnAction} ${styles.btnActionEdit}`} title="Редактировать">✏️</button>
-                                            <button onClick={() => handleDelete(user.id)} className={`${styles.btnAction} ${styles.btnActionDelete}`} title="Удалить">🗑️</button>
+                                            <button 
+                                                onClick={() => handleEdit(user)} 
+                                                className={`${styles.btnAction} ${styles.btnActionEdit}`} 
+                                                title="Редактировать"
+                                            >
+                                                ✏️
+                                            </button>
+                                            <button 
+                                                onClick={() => handleDelete(user.id)} 
+                                                className={`${styles.btnAction} ${styles.btnActionDelete}`} 
+                                                title="Удалить"
+                                            >
+                                                🗑️
+                                            </button>
                                         </td>
                                     </tr>
                                 ))
@@ -137,12 +221,46 @@ export default function UserCRUD() {
                         </tbody>
                     </table>
                 </div>
+
+                {/* Блок пагинации (Рендерится, если страниц больше одной) */}
+                {totalPages > 1 && (
+                    <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "24px" }}>
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage(prev => prev - 1)}
+                            className={`${styles.btn} ${styles.btnSecondary}`}
+                            style={{ padding: "8px 16px", fontSize: "0.9rem" }}
+                        >
+                            Назад
+                        </button>
+                        
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                            <button
+                                key={page}
+                                onClick={() => setCurrentPage(page)}
+                                className={`${styles.btn} ${currentPage === page ? styles.btnPrimary : styles.btnSecondary}`}
+                                style={{ padding: "8px 14px", fontSize: "0.9rem" }}
+                            >
+                                {page}
+                            </button>
+                        ))}
+
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage(prev => prev + 1)}
+                            className={`${styles.btn} ${styles.btnSecondary}`}
+                            style={{ padding: "8px 16px", fontSize: "0.9rem" }}
+                        >
+                            Вперед
+                        </button>
+                    </div>
+                )}
             </div>
 
-            {/* Форма добавления/редактирования */}
+            {/* Карточка формы добавления/редактирования */}
             <div className={styles.card}>
                 <h3 className={styles.sectionTitle}>
-                    {editingId ? "✏️ Редактировать профиль" : "➕ Регистрация нового пользователя"}
+                    {editingId ? "✏️ Редактировать профиль пользователя" : "➕ Регистрация нового пользователя"}
                 </h3>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formRow}>
@@ -188,7 +306,7 @@ export default function UserCRUD() {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Пароль {editingId ? "(оставьте пустым для сохранения старого)" : "*"}</label>
+                            <label>Пароль {editingId ? "(оставьте пустым для сохранения текущего)" : "*"}</label>
                             <input
                                 type="password"
                                 name="password"

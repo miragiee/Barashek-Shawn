@@ -214,12 +214,9 @@
 }
 
 .codeBadge {
-    background-color: #262626;
     padding: 4px 10px;
-    border-radius: 6px;
     font-family: monospace;
-    color: #ffc107;
-    border: 1px solid #3a3a3a;
+    color: #e0e0e0;
 }
 
 /* Дополнительная сетка для полей формы */
