@@ -27,22 +27,37 @@ export default function ReservationsCRUD() {
 
     const API_RESERVATIONS = "http://localhost:5000/api/admin/reservations";
     const API_TABLES = "http://localhost:5000/api/admin/tables";
-    const API_USERS = "http://localhost:5000/api/admin/users"; // Предполагаем наличие роута пользователей
+    const API_USERS = "http://localhost:5000/api/admin/users";
+
+    // Вспомогательная функция для генерации заголовков с токеном
+    const getHeaders = () => {
+        const token = localStorage.getItem("token");
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+    };
 
     const fetchData = async () => {
         setLoading(true);
         setError(null);
         try {
             const [resRes, tablesRes] = await Promise.all([
-                fetch(API_RESERVATIONS),
-                fetch(API_TABLES)
+                fetch(API_RESERVATIONS, { headers: getHeaders() }),
+                fetch(API_TABLES, { headers: getHeaders() })
             ]);
+
+            if (resRes.status === 401 || resRes.status === 403 || tablesRes.status === 401 || tablesRes.status === 403) {
+                throw new Error("Ошибка авторизации. Доступ к админ-панели запрещен.");
+            }
+
             if (!resRes.ok || !tablesRes.ok) throw new Error("Ошибка при загрузке данных бронирования");
+            
             setReservations(await resRes.json());
             setTables(await tablesRes.json());
             
-            // Загружаем пользователей для селекта в форме (мягкий фолбек, если роута нет)
-            const usersRes = await fetch("http://localhost:5000/api/admin/users").catch(() => null);
+            // Загружаем пользователей для селекта в форме
+            const usersRes = await fetch(API_USERS, { headers: getHeaders() }).catch(() => null);
             if (usersRes && usersRes.ok) setUsers(await usersRes.json());
         } catch (err) {
             setError(err.message);
@@ -70,7 +85,15 @@ export default function ReservationsCRUD() {
         setError(null);
         setSuccessMessage("");
         try {
-            const response = await fetch(`${API_RESERVATIONS}/${id}`, { method: "DELETE" });
+            const response = await fetch(`${API_RESERVATIONS}/${id}`, { 
+                method: "DELETE",
+                headers: getHeaders()
+            });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для удаления.");
+            }
+
             if (!response.ok) throw new Error("Не удалось удалить бронирование");
             setSuccessMessage("Бронирование успешно удалено!");
             fetchData();
@@ -78,6 +101,7 @@ export default function ReservationsCRUD() {
             setError(err.message);
         }
     };
+
     const handleEditClick = (res) => {
         setEditingReservationId(res.id);
         setUserId(res.user_id || "");
@@ -95,12 +119,21 @@ export default function ReservationsCRUD() {
     };
 
     const handleQuickStatusOrTableUpdate = async (id, currentStatus, currentTableId) => {
+        setError(null);
         try {
             const response = await fetch(`${API_RESERVATIONS}/${id}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: currentStatus, table_id: currentTableId ? parseInt(currentTableId) : null })
+                headers: getHeaders(),
+                body: JSON.stringify({ 
+                    status: currentStatus, 
+                    table_id: currentTableId ? parseInt(currentTableId) : null 
+                })
             });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для редактирования.");
+            }
+
             if (!response.ok) throw new Error("Ошибка быстрого обновления");
             fetchData();
         } catch (err) {
@@ -121,7 +154,7 @@ export default function ReservationsCRUD() {
             user_id: parseInt(userId),
             table_id: tableId ? parseInt(tableId) : null,
             reservation_date: reservationDate,
-            reservation_time: reservationTime + ":00",
+            reservation_time: reservationTime.length === 5 ? reservationTime + ":00" : reservationTime,
             guest_count: parseInt(guestCount),
             status
         };
@@ -130,10 +163,17 @@ export default function ReservationsCRUD() {
         try {
             const response = await fetch(url, {
                 method: editingReservationId ? "PUT" : "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: getHeaders(),
                 body: JSON.stringify(payload)
             });
-            if (!response.ok) throw new Error("Ошибка при сохранении бронирования");
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для сохранения изменений.");
+            }
+
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Ошибка при сохранении бронирования");
+
             setSuccessMessage(editingReservationId ? "Бронирование успешно обновлено!" : "Бронирование успешно создано!");
             resetForm();
             fetchData();
@@ -143,7 +183,11 @@ export default function ReservationsCRUD() {
     };
 
     const filteredReservations = reservations.filter((res) => {
-        const matchesSearch = res.first_name.toLowerCase().includes(searchTerm.toLowerCase()) || res.phone.includes(searchTerm);
+        const guestName = res.first_name ? String(res.first_name).toLowerCase() : "";
+        const guestPhone = res.phone ? String(res.phone) : "";
+        const search = searchTerm.toLowerCase();
+
+        const matchesSearch = guestName.includes(search) || guestPhone.includes(search);
         const matchesStatus = filterStatus === "" || res.status === filterStatus;
         return matchesSearch && matchesStatus;
     });
@@ -158,6 +202,7 @@ export default function ReservationsCRUD() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = sortedReservations.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(sortedReservations.length / itemsPerPage);
+
     return (
         <div>
             <h2 className={styles.panelTitle}>Управление бронированием столов (CRUD)</h2>
@@ -201,40 +246,46 @@ export default function ReservationsCRUD() {
                                     <th>Статус</th>
                                     <th>Действия</th>
                                 </tr>
-                            </thead>
+                            </thead> {/* <--- ИСПРАВЛЕНО ТУТ: теперь тег закрывается корректно */}
                             <tbody>
-                                {currentItems.map((res) => (
-                                    <tr key={res.id}>
-                                        <td>{res.id}</td>
-                                        <td><strong>{res.first_name}</strong><div style={{ fontSize: "0.85rem", color: "#aaa", marginTop: "4px" }}>{res.phone}</div></td>
-                                        <td><div>{new Date(res.reservation_date).toLocaleDateString("ru-RU")}</div><div style={{ color: "#ffc107", fontSize: "0.9rem", marginTop: "4px" }}>{res.reservation_time.slice(0, 5)}</div></td>
-                                        <td>{res.guest_count} чел.</td>
-                                        <td>
-                                            <select className={styles.inputField} style={{ padding: "6px", fontSize: "0.9rem", minWidth: "130px" }} value={res.table_id || ""} onChange={(e) => handleQuickStatusOrTableUpdate(res.id, res.status, e.target.value)}>
-                                                <option value="">-- Не назначен --</option>
-                                                {tables.map(t => <option key={t.id} value={t.id}>№{t.table_number} (до {t.capacity} чел)</option>)}
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select className={styles.inputField} style={{ padding: "6px", fontSize: "0.9rem", fontWeight: "bold" }} value={res.status} onChange={(e) => handleQuickStatusOrTableUpdate(res.id, e.target.value, res.table_id)}>
-                                                <option value="новое">Новое</option>
-                                                <option value="подтверждено">Подтверждено</option>
-                                                <option value="отменено">Отменено</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button className={styles.btn} onClick={() => handleEditClick(res)} style={{ backgroundColor: "#ffc107", color: "#121212", marginRight: "6px", padding: "6px 10px" }}>✏️</button>
-                                            <button className={styles.btn} onClick={() => handleDelete(res.id)} style={{ backgroundColor: "#dc3545", padding: "6px 10px" }}>🗑️</button>
-                                        </td>
+                                {currentItems.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="7" style={{ textAlign: "center", color: "#aaa", padding: "20px" }}>Бронирования не найдены</td>
                                     </tr>
-                                ))}
+                                ) : (
+                                    currentItems.map((res) => (
+                                        <tr key={res.id}>
+                                            <td>{res.id}</td>
+                                            <td><strong>{res.first_name}</strong><div style={{ fontSize: "0.85rem", color: "#aaa", marginTop: "4px" }}>{res.phone}</div></td>
+                                            <td><div>{new Date(res.reservation_date).toLocaleDateString("ru-RU")}</div><div style={{ color: "#ffc107", fontSize: "0.9rem", marginTop: "4px" }}>{res.reservation_time ? res.reservation_time.slice(0, 5) : ""}</div></td>
+                                            <td>{res.guest_count} чел.</td>
+                                            <td>
+                                                <select className={styles.inputField} style={{ padding: "6px", fontSize: "0.9rem", minWidth: "130px" }} value={res.table_id || ""} onChange={(e) => handleQuickStatusOrTableUpdate(res.id, res.status, e.target.value)}>
+                                                    <option value="">-- Не назначен --</option>
+                                                    {tables.map(t => <option key={t.id} value={t.id}>№{t.table_number} (до {t.capacity} чел)</option>)}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select className={styles.inputField} style={{ padding: "6px", fontSize: "0.9rem", fontWeight: "bold" }} value={res.status} onChange={(e) => handleQuickStatusOrTableUpdate(res.id, e.target.value, res.table_id)}>
+                                                    <option value="новое">Новое</option>
+                                                    <option value="подтверждено">Подтверждено</option>
+                                                    <option value="отменено">Отменено</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="button" className={styles.btn} onClick={() => handleEditClick(res)} style={{ backgroundColor: "#ffc107", color: "#121212", marginRight: "6px", padding: "6px 10px" }}>✏️</button>
+                                                <button type="button" className={styles.btn} onClick={() => handleDelete(res.id)} style={{ backgroundColor: "#dc3545", padding: "6px 10px" }}>🗑️</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
                             </tbody>
                         </table>
                         {totalPages > 1 && (
                             <div style={{ display: "flex", gap: "8px", marginTop: "20px", justifyContent: "center" }}>
-                                <button className={styles.btn} disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)} style={{ padding: "6px 12px", backgroundColor: "#262626" }}>Назад</button>
-                                {[...Array(totalPages)].map((_, i) => <button key={i + 1} className={styles.btn} onClick={() => setCurrentPage(i + 1)} style={{ padding: "6px 12px", backgroundColor: currentPage === i + 1 ? "#ffc107" : "#262626", color: currentPage === i + 1 ? "#121212" : "#fff" }}>{i + 1}</button>)}
-                                <button className={styles.btn} disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)} style={{ padding: "6px 12px", backgroundColor: "#262626" }}>Вперед</button>
+                                <button type="button" className={styles.btn} disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)} style={{ padding: "6px 12px", backgroundColor: "#262626" }}>Назад</button>
+                                {[...Array(totalPages)].map((_, i) => <button key={i + 1} type="button" className={styles.btn} onClick={() => setCurrentPage(i + 1)} style={{ padding: "6px 12px", backgroundColor: currentPage === i + 1 ? "#ffc107" : "#262626", color: currentPage === i + 1 ? "#121212" : "#fff" }}>{i + 1}</button>)}
+                                <button type="button" className={styles.btn} disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)} style={{ padding: "6px 12px", backgroundColor: "#262626" }}>Вперед</button>
                             </div>
                         )}
                     </div>

@@ -14,11 +14,27 @@ export default function ReviewsCRUD() {
 
     const API_REVIEWS = "http://localhost:5000/api/admin/reviews";
 
+    // Вспомогательная функция для генерации заголовков авторизации
+    const getHeaders = () => {
+        const token = localStorage.getItem("token");
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+    };
+
     const fetchReviews = async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(API_REVIEWS);
+            const response = await fetch(API_REVIEWS, {
+                headers: getHeaders()
+            });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Ошибка авторизации. Доступ к модерации отзывов запрещен.");
+            }
+
             if (!response.ok) throw new Error("Не удалось загрузить отзывы");
             const data = await response.json();
             setReviews(data);
@@ -39,10 +55,17 @@ export default function ReviewsCRUD() {
         setSuccessMessage("");
         try {
             const response = await fetch(`${API_REVIEWS}/${id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: getHeaders()
             });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для удаления отзыва.");
+            }
+
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || "Ошибка при удалении");
+            
             setSuccessMessage("Отзыв успешно удален из системы!");
             fetchReviews();
         } catch (err) {
@@ -65,7 +88,6 @@ export default function ReviewsCRUD() {
         const matchesRating = filterRating === "" || rev.rating === parseInt(filterRating);
         return matchesSearch && matchesRating;
     });
-
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -132,7 +154,7 @@ export default function ReviewsCRUD() {
                                             <div style={{ fontSize: "0.8rem", color: "#aaa", marginTop: "4px" }}>{rev.email}</div>
                                         </td>
                                         <td><span className={styles.codeBadge}>{rev.product_name}</span></td>
-                                        <td style={{ color: "#ffc107", fontWeight: "bold", fontSize: "1.1rem" }}>
+                                        <td style={{ color: "#ffc107", fontWeight: "bold", fontSize: "1.1rem", whiteSpace: "nowrap" }}>
                                             {"★".repeat(rev.rating)}{"☆".repeat(5 - rev.rating)}
                                         </td>
                                         <td style={{ maxWidth: "300px", wordBreak: "break-word" }}>
@@ -142,9 +164,9 @@ export default function ReviewsCRUD() {
                                                 </span>
                                             )}
                                         </td>
-
                                         <td>
                                             <button 
+                                                type="button"
                                                 className={styles.btn} 
                                                 onClick={() => handleDeleteReview(rev.id)}
                                                 style={{ backgroundColor: "#dc3545", color: "#fff", padding: "6px 12px" }}
@@ -156,7 +178,9 @@ export default function ReviewsCRUD() {
                                 ))}
                                 {currentItems.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" className={styles.emptyRow}>Отзывов по заданным критериям не найдено</td>
+                                        <td colSpan="6" className={styles.emptyRow} style={{ textAlign: "center", padding: "20px", color: "#aaa" }}>
+                                            Отзывов по заданным критериям не найдено
+                                        </td>
                                     </tr>
                                 )}
                             </tbody>
@@ -164,11 +188,11 @@ export default function ReviewsCRUD() {
 
                         {totalPages > 1 && (
                             <div style={{ display: "flex", gap: "8px", marginTop: "20px", justifyContent: "center" }}>
-                                <button className={styles.btn} disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)} style={{ padding: "6px 12px", backgroundColor: "#262626", color: "#fff" }}>Назад</button>
+                                <button type="button" className={styles.btn} disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)} style={{ padding: "6px 12px", backgroundColor: "#262626", color: "#fff" }}>Назад</button>
                                 {[...Array(totalPages)].map((_, i) => (
-                                    <button key={i + 1} className={styles.btn} onClick={() => setCurrentPage(i + 1)} style={{ padding: "6px 12px", backgroundColor: currentPage === i + 1 ? "#ffc107" : "#262626", color: currentPage === i + 1 ? "#121212" : "#fff" }}>{i + 1}</button>
+                                    <button key={i + 1} type="button" className={styles.btn} onClick={() => setCurrentPage(i + 1)} style={{ padding: "6px 12px", backgroundColor: currentPage === i + 1 ? "#ffc107" : "#262626", color: currentPage === i + 1 ? "#121212" : "#fff" }}>{i + 1}</button>
                                 ))}
-                                <button className={styles.btn} disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)} style={{ padding: "6px 12px", backgroundColor: "#262626", color: "#fff" }}>Вперед</button>
+                                <button type="button" className={styles.btn} disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev - 1)} style={{ padding: "6px 12px", backgroundColor: "#262626", color: "#fff" }}>Вперед</button>
                             </div>
                         )}
                     </div>

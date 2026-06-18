@@ -9,17 +9,13 @@ import styles from "./styles/Login.module.css";
 export default function Login() {
     const navigate = useNavigate();
 
-    // Состояния для хранения значений полей ввода
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    // Состояния для ошибок и статуса загрузки
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    // Обработчик отправки формы
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Предотвращаем перезагрузку страницы
+        e.preventDefault();
         setError("");
         setIsLoading(true);
 
@@ -41,17 +37,19 @@ export default function Login() {
             const data = await response.json();
 
             if (!response.ok) {
-                // Если сервер вернул ошибку (неверный пароль или юзер не найден)
                 throw new Error(data.error || "Произошла ошибка при входе");
             }
 
-            // Успешная авторизация: сохраняем токен и данные пользователя в localStorage
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
 
-            // Перенаправляем пользователя (например, на главную страницу или в админку)
-            // Если этот пользователь администратор, можно сделать проверку, но пока перенаправим на главную:
-            navigate("/"); 
+            // ПРОВЕРКА НА АДМИНА:
+            // Если email совпадает с админским, перенаправляем в админку
+            if (data.user.email === "json@yandex.ru") {
+                navigate("/AdminPanel");
+            } else {
+                navigate("/"); 
+            }
             
         } catch (err) {
             setError(err.message);
@@ -66,10 +64,7 @@ export default function Login() {
             <main className={styles.Container}>
                 <h1 className={styles.Title}>Вход</h1>
                 
-                {/* Форма авторизации */}
                 <form onSubmit={handleSubmit} className={styles.Inputs}>
-                    
-                    {/* Вывод ошибки, если она есть */}
                     {error && (
                         <div style={{
                             color: "#dc3545",

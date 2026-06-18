@@ -25,7 +25,11 @@ const db = mysql.createPool({
     ssl: false 
 });
 
-// Middleware для проверки токена
+// ==========================================
+// MIDDLEWARES ДЛЯ ПРОВЕРКИ ПРАВ
+// ==========================================
+
+// 1. Общая проверка: авторизован ли пользователь вообще
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1]; // Извлечение токена из "Bearer TOKEN"
@@ -37,6 +41,14 @@ const authenticateToken = (req, res, next) => {
         req.user = user;
         next();
     });
+};
+
+// 2. Строгая проверка: является ли пользователь администратором (role_id === 1)
+const requireAdmin = (req, res, next) => {
+    if (!req.user || req.user.role_id !== 1) {
+        return res.status(403).json({ error: "Доступ запрещен. Требуются права администратора." });
+    }
+    next();
 };
 
 // ==========================================
@@ -55,10 +67,10 @@ app.get("/api/products", (req, res) => {
 });
 
 // ==========================================
-// 2. РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ (Таблица users)
+// 2. РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ
 // ==========================================
 
-// Регистрация
+// Регистрация (по умолчанию регистрируем как обычного пользователя, например, с дефолтным role_id или без, если в БД настроен DEFAULT)
 app.post("/api/auth/register", async (req, res) => {
     const { first_name, phone, email, password } = req.body;
     if (!email || !password || !first_name || !phone) {
@@ -67,7 +79,8 @@ app.post("/api/auth/register", async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const sqlQuery = "INSERT INTO users (first_name, phone, email, password_hash) VALUES (?, ?, ?, ?)";
+        // Если в вашей структуре у role_id нет значения DEFAULT, укажем ID роли обычного пользователя (например, 2 или иное существующее)
+        const sqlQuery = "INSERT INTO users (first_name, phone, email, password_hash, role_id) VALUES (?, ?, ?, ?, 2)"; 
 
         db.query(sqlQuery, [first_name, phone, email, hashedPassword], (err, result) => {
             if (err) {
@@ -82,7 +95,7 @@ app.post("/api/auth/register", async (req, res) => {
     }
 });
 
-// Логин
+// Логин (Добавлено извлечение role_id)
 app.post("/api/auth/login", (req, res) => {
     const { email, password } = req.body;
     const sqlQuery = "SELECT * FROM users WHERE email = ?";
@@ -96,21 +109,28 @@ app.post("/api/auth/login", (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password_hash);
         if (!isMatch) return res.status(400).json({ error: "Неверный пароль" });
 
-        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "24h" });
+        // Важно: упаковываем role_id внутрь JWT токена для безопасности
+        const token = jwt.sign({ id: user.id, email: user.email, role_id: user.role_id }, JWT_SECRET, { expiresIn: "24h" });
 
         res.json({
             token,
-            user: { id: user.id, first_name: user.first_name, email: user.email, phone: user.phone }
+            user: { 
+                id: user.id, 
+                first_name: user.first_name, 
+                email: user.email, 
+                phone: user.phone,
+                role_id: user.role_id // Отправляем role_id на фронтенд для роутинга
+            }
         });
     });
 });
 
 // ==========================================
-// 3. ОФОРМЛЕНИЕ ЗАКАЗА (Таблицы orders и order_items)
+// 3. ОФОРМЛЕНИЕ ЗАКАЗА (ДЛЯ КЛИЕНТОВ)
 // ==========================================
 app.post("/api/orders", authenticateToken, (req, res) => {
     const userId = req.user.id;
-    const { items, total_price, delivery_address, comment } = req.body; 
+    const { items, total_price, delivery_address, comment } = req.body;
 
     if (!items || items.length === 0) return res.status(400).json({ error: "Корзина пуста" });
 
@@ -125,7 +145,6 @@ app.post("/api/orders", authenticateToken, (req, res) => {
         const orderId = orderResult.insertId;
         const orderItemsQuery = "INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ?";
         
-        // Исправлено: Стойкая защита от различий полей на фронтенде (поддержка id/product_id и price/price_at_purchase)
         const values = items.map(item => [
             orderId, 
             item.product_id || item.id, 
@@ -144,13 +163,12 @@ app.post("/api/orders", authenticateToken, (req, res) => {
 });
 
 // ==========================================
-// 4. CRUD ДЛЯ АДМИН-ПАНЕЛИ (С ЗАЩИТОЙ ПО ТОКЕНУ)
+// 4. CRUD ДЛЯ АДМИН-ПАНЕЛИ (ДВОЙНАЯ ЗАЩИТА: ТОКЕН + РОЛЬ АДМИНА)
 // ==========================================
 
 // --- КАТЕГОРИИ ---
 
-// Получить все категории
-app.get("/api/admin/categories", authenticateToken, (req, res) => {
+app.get("/api/admin/categories", authenticateToken, requireAdmin, (req, res) => {
     const sqlQuery = "SELECT * FROM categories ORDER BY name ASC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -161,8 +179,7 @@ app.get("/api/admin/categories", authenticateToken, (req, res) => {
     });
 });
 
-// Создать категорию
-app.post("/api/admin/categories", authenticateToken, (req, res) => {
+app.post("/api/admin/categories", authenticateToken, requireAdmin, (req, res) => {
     const { name, slug } = req.body;
     if (!name || !slug) return res.status(400).json({ error: "Заполните поля name и slug" });
 
@@ -176,8 +193,7 @@ app.post("/api/admin/categories", authenticateToken, (req, res) => {
     });
 });
 
-// Изменить существующую категорию по ID
-app.put("/api/admin/categories/:id", authenticateToken, (req, res) => {
+app.put("/api/admin/categories/:id", authenticateToken, requireAdmin, (req, res) => {
     const categoryId = req.params.id;
     const { name, slug } = req.body;
 
@@ -200,8 +216,7 @@ app.put("/api/admin/categories/:id", authenticateToken, (req, res) => {
     });
 });
 
-// Удалить категорию по ID
-app.delete("/api/admin/categories/:id", authenticateToken, (req, res) => {
+app.delete("/api/admin/categories/:id", authenticateToken, requireAdmin, (req, res) => {
     const categoryId = req.params.id;
     const sqlQuery = "DELETE FROM categories WHERE id = ?";
     
@@ -210,7 +225,7 @@ app.delete("/api/admin/categories/:id", authenticateToken, (req, res) => {
             console.error("ОШИБКА DELETE CATEGORY:", err);
             if (err.code === "ER_ROW_IS_REFERENCED_2") {
                 return res.status(400).json({ 
-                    error: "Нельзя удалить категорию, так как к ней привязаны товары. Сначала удалите товары или перенесите их в другую категорию." 
+                    error: "Нельзя удалить категорию, так как к ней привязаны товары. Сначала удалите товары или перенесите их в другую категорию."
                 });
             }
             return res.status(500).json({ error: "Ошибка при удалении категории" });
@@ -227,8 +242,7 @@ app.delete("/api/admin/categories/:id", authenticateToken, (req, res) => {
 
 // --- ТОВАРЫ ---
 
-// 1. Получить все товары для админки
-app.get("/api/admin/products", authenticateToken, (req, res) => {
+app.get("/api/admin/products", authenticateToken, requireAdmin, (req, res) => {
     const sqlQuery = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -239,8 +253,7 @@ app.get("/api/admin/products", authenticateToken, (req, res) => {
     });
 });
 
-// 2. Добавить новый товар
-app.post("/api/admin/products", authenticateToken, (req, res) => {
+app.post("/api/admin/products", authenticateToken, requireAdmin, (req, res) => {
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
 
     if (!category_id || !name || !price) {
@@ -267,8 +280,7 @@ app.post("/api/admin/products", authenticateToken, (req, res) => {
     });
 });
 
-// 3. Редактировать товар
-app.put("/api/admin/products/:id", authenticateToken, (req, res) => {
+app.put("/api/admin/products/:id", authenticateToken, requireAdmin, (req, res) => {
     const productId = req.params.id;
     const { category_id, name, description, weight_g, price, is_available, images_url } = req.body;
 
@@ -296,8 +308,7 @@ app.put("/api/admin/products/:id", authenticateToken, (req, res) => {
     });
 });
 
-// 4. Удалить товар
-app.delete("/api/admin/products/:id", authenticateToken, (req, res) => {
+app.delete("/api/admin/products/:id", authenticateToken, requireAdmin, (req, res) => {
     const productId = req.params.id;
     const sqlQuery = "DELETE FROM products WHERE id = ?";
     db.query(sqlQuery, [productId], (err, result) => {
@@ -315,8 +326,7 @@ app.delete("/api/admin/products/:id", authenticateToken, (req, res) => {
 
 // --- БРОНИРОВАНИЕ ---
 
-// 1. Получить все бронирования
-app.get("/api/admin/reservations", authenticateToken, (req, res) => {
+app.get("/api/admin/reservations", authenticateToken, requireAdmin, (req, res) => {
     const sqlQuery = `
         SELECT r.*, u.first_name, u.phone, u.email, t.table_number, t.capacity 
         FROM reservations r
@@ -327,14 +337,13 @@ app.get("/api/admin/reservations", authenticateToken, (req, res) => {
     db.query(sqlQuery, (err, results) => {
         if (err) {
             console.error("ОШИБКА READ RESERVATIONS:", err);
-            return res.status(500).json({ error: "Ошибка при получении списка бронирований" });
+            return res.status(500).json({ error: "Ошибка при получении списка бронирования" });
         }
         res.json(results);
     });
 });
 
-// 2. Получить список всех столов ресторана
-app.get("/api/admin/tables", authenticateToken, (req, res) => {
+app.get("/api/admin/tables", authenticateToken, requireAdmin, (req, res) => {
     const sqlQuery = "SELECT * FROM tables ORDER BY table_number ASC";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -345,8 +354,7 @@ app.get("/api/admin/tables", authenticateToken, (req, res) => {
     });
 });
 
-// 3. Обновить статус брони или назначить столик
-app.put("/api/admin/reservations/:id", authenticateToken, (req, res) => {
+app.put("/api/admin/reservations/:id", authenticateToken, requireAdmin, (req, res) => {
     const reservationId = req.params.id;
     const { status, table_id } = req.body;
 
@@ -366,8 +374,7 @@ app.put("/api/admin/reservations/:id", authenticateToken, (req, res) => {
     });
 });
 
-// 4. Удалить бронирование
-app.delete("/api/admin/reservations/:id", authenticateToken, (req, res) => {
+app.delete("/api/admin/reservations/:id", authenticateToken, requireAdmin, (req, res) => {
     db.query("DELETE FROM reservations WHERE id = ?", [req.params.id], (err) => {
         if (err) return res.status(500).json({ error: "Ошибка удаления брони" });
         res.json({ message: "Бронирование удалено" });
@@ -377,8 +384,7 @@ app.delete("/api/admin/reservations/:id", authenticateToken, (req, res) => {
 
 // --- ОТЗЫВЫ ---
 
-// 1. Получить все отзывы
-app.get("/api/admin/reviews", authenticateToken, (req, res) => {
+app.get("/api/admin/reviews", authenticateToken, requireAdmin, (req, res) => {
     const sqlQuery = `
         SELECT r.*, u.first_name, u.email, p.name AS product_name 
         FROM reviews r
@@ -395,8 +401,7 @@ app.get("/api/admin/reviews", authenticateToken, (req, res) => {
     });
 });
 
-// 2. Удалить отзыв по ID
-app.delete("/api/admin/reviews/:id", authenticateToken, (req, res) => {
+app.delete("/api/admin/reviews/:id", authenticateToken, requireAdmin, (req, res) => {
     const reviewId = req.params.id;
     const sqlQuery = "DELETE FROM reviews WHERE id = ?";
 
@@ -413,11 +418,10 @@ app.delete("/api/admin/reviews/:id", authenticateToken, (req, res) => {
 });
 
 
-// --- ПОЛЬЗОВАТЕЛИ ---
+// --- ПОЛЬЗОВАТЕЛИ (Вывод поля role_id при получении и редактировании) ---
 
-// 1. Получить список всех пользователей
-app.get("/api/admin/users", authenticateToken, (req, res) => {
-    const sqlQuery = "SELECT id, first_name, phone, email, created_at FROM users ORDER BY id DESC";
+app.get("/api/admin/users", authenticateToken, requireAdmin, (req, res) => {
+    const sqlQuery = "SELECT id, first_name, phone, email, role_id, created_at FROM users ORDER BY id DESC"; 
     db.query(sqlQuery, (err, results) => {
         if (err) {
             console.error("ОШИБКА READ ALL USERS:", err);
@@ -427,19 +431,19 @@ app.get("/api/admin/users", authenticateToken, (req, res) => {
     });
 });
 
-// 2. Добавить нового пользователя
-app.post("/api/admin/users", authenticateToken, async (req, res) => {
-    const { first_name, phone, email, password } = req.body;
+app.post("/api/admin/users", authenticateToken, requireAdmin, async (req, res) => {
+    const { first_name, phone, email, password, role_id } = req.body; 
 
     if (!first_name || !phone || !email || !password) {
-        return res.status(400).json({ error: "Все поля (имя, телефон, email и пароль) обязательны для заполнения" });
+        return res.status(400).json({ error: "Все поля обязательны для заполнения" });
     }
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const sqlQuery = "INSERT INTO users (first_name, phone, email, password_hash) VALUES (?, ?, ?, ?)";
+        const finalRoleId = role_id ? parseInt(role_id) : 2; // По умолчанию обычный юзер, если не указано
+        const sqlQuery = "INSERT INTO users (first_name, phone, email, password_hash, role_id) VALUES (?, ?, ?, ?, ?)"; 
 
-        db.query(sqlQuery, [first_name, phone, email, hashedPassword], (err, result) => {
+        db.query(sqlQuery, [first_name, phone, email, hashedPassword, finalRoleId], (err, result) => {
             if (err) {
                 console.error("ОШИБКА АДМИН-СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ:", err);
                 if (err.code === "ER_DUP_ENTRY") {
@@ -450,14 +454,13 @@ app.post("/api/admin/users", authenticateToken, async (req, res) => {
             res.status(201).json({ message: "Пользователь успешно создан", id: result.insertId });
         });
     } catch (e) {
-        res.status(500).json({ error: "Внутренняя ошибка сервера при шифровании пароля" });
+        res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }
 });
 
-// 3. Редактировать пользователя
-app.put("/api/admin/users/:id", authenticateToken, async (req, res) => {
+app.put("/api/admin/users/:id", authenticateToken, requireAdmin, async (req, res) => {
     const userId = req.params.id;
-    const { first_name, phone, email, password } = req.body;
+    const { first_name, phone, email, password, role_id } = req.body; 
 
     if (!first_name || !phone || !email) {
         return res.status(400).json({ error: "Поля имя, телефон и email обязательны" });
@@ -466,14 +469,15 @@ app.put("/api/admin/users/:id", authenticateToken, async (req, res) => {
     try {
         let sqlQuery;
         let values;
+        const finalRoleId = role_id ? parseInt(role_id) : 2;
 
         if (password && password.trim() !== "") {
             const hashedPassword = await bcrypt.hash(password, 10);
-            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ?, password_hash = ? WHERE id = ?";
-            values = [String(first_name), String(phone), String(email), hashedPassword, userId];
+            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ?, password_hash = ?, role_id = ? WHERE id = ?"; 
+            values = [String(first_name), String(phone), String(email), hashedPassword, finalRoleId, userId]; 
         } else {
-            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ? WHERE id = ?";
-            values = [String(first_name), String(phone), String(email), userId];
+            sqlQuery = "UPDATE users SET first_name = ?, phone = ?, email = ?, role_id = ? WHERE id = ?"; 
+            values = [String(first_name), String(phone), String(email), finalRoleId, userId]; 
         }
 
         db.query(sqlQuery, values, (err, result) => {
@@ -491,8 +495,7 @@ app.put("/api/admin/users/:id", authenticateToken, async (req, res) => {
     }
 });
 
-// 4. Удалить пользователя
-app.delete("/api/admin/users/:id", authenticateToken, (req, res) => {
+app.delete("/api/admin/users/:id", authenticateToken, requireAdmin, (req, res) => {
     const userId = req.params.id;
     const sqlQuery = "DELETE FROM users WHERE id = ?";
 
@@ -501,7 +504,7 @@ app.delete("/api/admin/users/:id", authenticateToken, (req, res) => {
             console.error("ОШИБКА DELETE USER:", err);
             if (err.code === "ER_ROW_IS_REFERENCED_2") {
                 return res.status(400).json({ 
-                    error: "Нельзя удалить пользователя, так как к нему привязаны активные заказы, отзывы или бронирования столов." 
+                    error: "Нельзя удалить пользователя, так как к нему привязаны активные заказы, отзывы или бронирования столов."
                 });
             }
             return res.status(500).json({ error: "Ошибка при удалении пользователя из базы данных" });

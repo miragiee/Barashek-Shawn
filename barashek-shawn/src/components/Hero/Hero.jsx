@@ -15,7 +15,7 @@ export default function Hero(){
                 </div>
                 <div className={styles.buttonContainer}>
                     <div className={styles.abutton}><HashLink smooth to="/#booking">Забронировать стол</HashLink></div>
-                    <div className={styles.bbutton}><a href="">Заказать доставку</a></div>
+                    <div className={styles.bbutton}><HashLink to="/Catalog">Заказать доставку</HashLink></div>
                 </div>
             </div>
         </div>

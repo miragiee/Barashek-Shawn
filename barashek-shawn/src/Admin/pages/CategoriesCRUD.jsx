@@ -19,11 +19,26 @@ export default function CategoriesCRUD() {
 
     const API_URL = "http://localhost:5000/api/admin/categories";
 
+    // Функция генерации заголовков с токеном
+    const getHeaders = () => {
+        const token = localStorage.getItem("token");
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+    };
+
     const fetchCategories = async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(API_URL);
+            const response = await fetch(API_URL, {
+                method: "GET",
+                headers: getHeaders() // Добавлена авторизация
+            });
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Ошибка авторизации. Доступ запрещен.");
+            }
             if (!response.ok) throw new Error("Не удалось загрузить категории");
             const data = await response.json();
             setCategories(data);
@@ -58,8 +73,14 @@ export default function CategoriesCRUD() {
         setError(null);
         setSuccessMessage("");
         try {
-            const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+            const response = await fetch(`${API_URL}/${id}`, { 
+                method: "DELETE",
+                headers: getHeaders() // Добавлена авторизация
+            });
             const data = await response.json();
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для удаления.");
+            }
             if (!response.ok) throw new Error(data.error || "Ошибка удаления");
             setSuccessMessage("Категория успешно удалена!");
             fetchCategories();
@@ -83,10 +104,13 @@ export default function CategoriesCRUD() {
         try {
             const response = await fetch(url, {
                 method: method,
-                headers: { "Content-Type": "application/json" },
+                headers: getHeaders(), // Добавлена авторизация
                 body: JSON.stringify({ name, slug }),
             });
             const data = await response.json();
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для выполнения этого действия.");
+            }
             if (!response.ok) throw new Error(data.error || "Ошибка при сохранении");
 
             setSuccessMessage(editingCategoryId ? "Категория обновлена!" : "Категория создана!");
@@ -129,6 +153,7 @@ export default function CategoriesCRUD() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = sortedCategories.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(sortedCategories.length / itemsPerPage);
+    
     return (
         <div>
             <h2 className={styles.panelTitle}>Управление категориями</h2>

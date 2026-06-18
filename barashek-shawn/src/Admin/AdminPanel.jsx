@@ -1,13 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Исправлено: добавлен useEffect
+import { useNavigate } from "react-router-dom"; // Исправлено: добавлен useNavigate
 import CategoriesCRUD from "./pages/CategoriesCRUD";
 import ProductsCRUD from "./pages/ProductCRUD";
 import ReservationsCRUD from "./pages/ReservationCRUD";
 import ReviewsCRUD from "./pages/ReviewCRUD";
-import UserCRUD from "./pages/UserCRUD"; // Импортируем новый CRUD
+import UserCRUD from "./pages/UserCRUD"; 
 import styles from "./AdminStyles.module.css";
 
 export default function AdminPanel() {
+    const navigate = useNavigate(); // Исправлено: инициализируем navigate внутри компонента
     const [activeTab, setActiveTab] = useState("categories");
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        
+        if (!storedUser) {
+            // Если токена/пользователя нет вообще — отправляем на логин
+            navigate("/Login");
+            return;
+        }
+
+        try {
+            const user = JSON.parse(storedUser);
+            // Если вошел обычный пользователь, а не админ — тоже выгоняем на логин
+            // Измените старое условие проверки в AdminPanel.jsx
+            if (user.role_id !== 1) { 
+                navigate("/Login");
+            } else {
+                setIsAdmin(true); 
+            }
+        } catch (e) {
+            navigate("/Login");
+        }
+    }, [navigate]);
+
+    // Пока идет проверка прав, ничего важного не рендерим
+    if (!isAdmin) {
+        return <div style={{ color: '#fff', padding: '20px' }}>Проверка прав доступа...</div>;
+    }
 
     return (
         <div className={styles.adminLayout}>
@@ -52,11 +83,10 @@ export default function AdminPanel() {
             <main className={styles.contentArea}>
                 {activeTab === "categories" && <CategoriesCRUD />}
                 {activeTab === "products" && <ProductsCRUD />} 
-                {activeTab === "users" && <UserCRUD />} {/* Отрисовка пользователей */}
+                {activeTab === "users" && <UserCRUD />} 
                 {activeTab === "reservations" && <ReservationsCRUD />} 
                 {activeTab === "reviews" && <ReviewsCRUD />} 
             </main>
         </div>
     );
 }
-

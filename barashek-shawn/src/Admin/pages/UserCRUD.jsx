@@ -22,11 +22,29 @@ export default function UserCRUD() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Количество пользователей на одной странице
 
+    // Вспомогательная функция для генерации заголовков с токеном авторизации
+    const getHeaders = () => {
+        const token = localStorage.getItem("token");
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        };
+    };
+
     // Загрузка списка пользователей с бэкенда
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/admin/users");
+            setError("");
+            const response = await fetch("http://localhost:5000/api/admin/users", {
+                method: "GET",
+                headers: getHeaders() // Добавлен заголовок авторизации
+            });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Ошибка авторизации. Доступ запрещен.");
+            }
             if (!response.ok) throw new Error("Не удалось загрузить пользователей");
+            
             const data = await response.json();
             setUsers(data);
         } catch (err) {
@@ -58,9 +76,13 @@ export default function UserCRUD() {
         try {
             const response = await fetch(url, {
                 method,
-                headers: { "Content-Type": "application/json" },
+                headers: getHeaders(), // Добавлен заголовок авторизации
                 body: JSON.stringify(formData)
             });
+
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для выполнения этого действия.");
+            }
 
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || "Ошибка при сохранении данных");
@@ -95,10 +117,15 @@ export default function UserCRUD() {
 
         try {
             const response = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: getHeaders() // Добавлен заголовок авторизации
             });
-            const result = await response.json();
 
+            if (response.status === 401 || response.status === 403) {
+                throw new Error("Недостаточно прав для удаления.");
+            }
+
+            const result = await response.json();
             if (!response.ok) throw new Error(result.error || "Ошибка при удалении");
 
             setSuccess("Пользователь успешно удален");
