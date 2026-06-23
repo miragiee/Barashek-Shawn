@@ -43,13 +43,15 @@ export default function Recommendations() {
                 <div className={styles.CardBlock}>
                     {dishes.map((dish) => (
                         <DishCard 
-                            key={dish.id} 
+                            key={dish.id || dish.product_id} // Безопасный ключ для React
+                            id={dish.id || dish.product_id}   // ИСПРАВЛЕНО: Теперь ID передается внутрь карточки!
                             name={dish.name} 
                             price={dish.price} 
                             imageUrl={dish.image_url} 
                         />
                     ))}
                 </div>
+
                 <button className={styles.MoveRight}>
                     <img src={arrowRight} alt="Следующий" />
                 </button>

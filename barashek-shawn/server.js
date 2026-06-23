@@ -613,6 +613,26 @@ app.post("/api/reservations", authenticateToken, (req, res) => {
     });
 });
 
+app.get("/api/dishes/:id", (req, res) => {
+    const dishId = req.params.id;
+
+    console.log("Запрос блюда с ID:", dishId); 
+    const sqlQuery = "SELECT * FROM products WHERE id = ?"; 
+
+    db.query(sqlQuery, [parseInt(dishId)], (err, results) => {
+        if (err) {
+            console.error("КРИТИЧЕСКАЯ ОШИБКА БАЗЫ ДАННЫХ:", err.message);
+            return res.status(500).json({ error: "Ошибка MySQL", details: err.message });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ error: "Блюдо с таким ID не найдено" });
+        }
+        res.json(results[0]); 
+    });
+});
+
+
 
 const PORT = process.env.SERVER_PORT || 5000;
 app.listen(PORT, () => console.log(`Бэкенд запущен на порту ${PORT}`));

@@ -31,7 +31,10 @@ function App() {
         <Routes>
           {/* User */}
           <Route path="/" element={<MainPage/>}/>
-          <Route path="/DishPage" element={<DishPage/>}/>
+          
+          {/* ИЗМЕНЕНО: Перевели страницу блюда на динамический ID */}
+          <Route path="/DishPage/:id" element={<DishPage/>}/>
+          
           <Route path="/Catalog" element={<Catalog/>}/>
           <Route path="/Login" element={<Login/>}/>
           <Route path="/PaymentMethod" element={<PaymentMethod/>}/>
