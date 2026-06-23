@@ -518,5 +518,101 @@ app.delete("/api/admin/users/:id", authenticateToken, requireAdmin, (req, res) =
     });
 });
 
+// Роут для обновления данных текущего пользователя
+app.put("/api/user/profile", authenticateToken, async (req, res) => {
+    // ID пользователя берется из middleware authenticateToken (req.user)
+    const userId = req.user.id; 
+    const { first_name, phone, email } = req.body;
+
+    // Проверяем обязательные поля (если они у вас обязательны)
+    if (!first_name || !phone || !email) {
+        return res.status(400).json({ error: "Имя, телефон и email обязательны для заполнения" });
+    }
+
+    // Если в вашей таблице users изначально не было поля last_name, 
+    // не забудьте добавить его в БД или убрать из этого запроса
+    const sqlQuery = `
+        UPDATE users 
+        SET first_name = ?, phone = ?, email = ? 
+        WHERE id = ?
+    `;
+
+    db.query(sqlQuery, [first_name, phone, email, userId], (err, result) => {
+        if (err) {
+            console.error("ОШИБКА ОБНОВЛЕНИЯ ПРОФИЛЯ:", err);
+            if (err.code === "ER_DUP_ENTRY") {
+                return res.status(400).json({ error: "Этот Email или телефон уже используются" });
+            }
+            return res.status(500).json({ error: "Ошибка при обновлении данных" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Пользователь не найден" });
+        }
+
+        res.json({ message: "Данные успешно обновлены!" });
+    });
+});
+
+// Получение данных текущего авторизованного пользователя
+app.get("/api/user/profile", authenticateToken, (req, res) => {
+    // ID достаем из токена, который обработал middleware authenticateToken
+    const userId = req.user.id; 
+
+    const sqlQuery = "SELECT first_name, email, phone FROM users WHERE id = ?";
+    db.query(sqlQuery, [userId], (err, results) => {
+        if (err) {
+            console.error("ОШИБКА GET PROFILE:", err);
+            return res.status(500).json({ error: "Ошибка базы данных" });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ error: "Пользователь не найден" });
+        }
+        // Возвращаем объект пользователя { first_name, email, phone }
+        res.json(results[0]); 
+    });
+});
+
+// 1. Получить список всех столов для выпадающего списка формы
+app.get("/api/tables", (req, res) => {
+    const sqlQuery = "SELECT id, table_number, capacity FROM tables ORDER BY table_number ASC";
+    db.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error("ОШИБКА ПОЛУЧЕНИЯ СТОЛОВ:", err);
+            return res.status(500).json({ error: "Не удалось загрузить список столов" });
+        }
+        res.json(results);
+    });
+});
+
+// 2. Создать новое бронирование (Доступно авторизованному пользователю)
+app.post("/api/reservations", authenticateToken, (req, res) => {
+    // Получаем user_id из JWT-токена через middleware authenticateToken
+    const userId = req.user.id; 
+    const { tableId, reservationDate, reservationTime } = req.body;
+
+    if (!tableId || !reservationDate || !reservationTime) {
+        return res.status(400).json({ error: "Выберите столик, дату и время бронирования" });
+    }
+
+    // По умолчанию ставим статус 'pending' (ожидает подтверждения админом)
+    const status = 'pending'; 
+
+    const sqlQuery = `
+        INSERT INTO reservations (user_id, table_id, reservation_date, reservation_time, status) 
+        VALUES (?, ?, ?, ?, ?)
+    `;
+    const values = [userId, parseInt(tableId), reservationDate, reservationTime, status];
+
+    db.query(sqlQuery, values, (err, result) => {
+        if (err) {
+            console.error("ОШИБКА СОЗДАНИЯ БРОНИ:", err);
+            return res.status(500).json({ error: "Ошибка сервера при создании бронирования" });
+        }
+        res.status(201).json({ message: "Заявка на бронирование успешно отправлена!" });
+    });
+});
+
+
 const PORT = process.env.SERVER_PORT || 5000;
 app.listen(PORT, () => console.log(`Бэкенд запущен на порту ${PORT}`));

@@ -112,6 +112,11 @@
 }
 
 .SubmitButton {
+    width: 310px;
+    height: 48px;
+
+    border: none;
+
     font-size: 14px;
     font-weight: lighter;
 
